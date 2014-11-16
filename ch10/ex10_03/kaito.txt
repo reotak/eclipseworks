@@ -1,0 +1,3 @@
+isWorkingDayIfVer()よりも、isWorkingDaySwitchVer()のほうがより明瞭なように感じる。
+しかし、isWorkingDayIfVer2()と比較した場合にはほとんど差はないように思える。
+

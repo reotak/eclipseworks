@@ -1,0 +1,16 @@
+3 << 2L - 1     => 6 int型
+(3L << 2) - 1   => 5 int型
+10 < 12 == 6    => (boolean) == (int) であり正しくない
+10 << 12 == 6
+ -> 1010b << 12 == 6
+ -> 1010000000000000b == 6          => false boolean型
+13.5e-1 % Float.POSITIVE_INFINITY   =>  1.35D double型
+Float.POSITIVE_INFINITY + Double.NEGATIVE_INFINITY => NaN double型
+Double.POSITIVE_INFINITY - Float.NEGATIVE_INFINITY => +infinity double型
+0.0 / -0.0 == -0.0 / 0.0
+ -> NaN == Nan                              => false boolean型
+Integer.MAX_VALUE + Integer.MIN_VALUE       => -1 int型
+Long.MAX_VALUE + 5                          => (Long.MIN_VALUE + 4) long型
+(short) 5 * (byte) 10                       => 50 int型
+(i < 15 ? 1.72e3f : 0)                      => 1720.0 もしくは 0.0 float型
+i++ + i++  + --i                            => 11 iの型

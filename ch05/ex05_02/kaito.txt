@@ -1,0 +1,2 @@
+HistoryはBankAccountの内部クラスActionと直接関連付けられている。そのためBankAccountにネストしたクラスとすべきである。
+BankAccountのインスタンスの処理の記録を持つクラスであるため、staticにはすべきではない。
