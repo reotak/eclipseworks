@@ -1,0 +1,22 @@
+・PassengerVehicle オブジェクトの定員を負の値に設定しようとした。
+ => throw new IllegalArgumentError("オブジェクトの店員数は0以上");
+
+・オブジェクトがその初期値を設定するのに使用する設定ファイルに、文法エラーが見つかった。
+ => throw new ParseException("設定ファイル○○に文法エラーがあります");
+
+・プログラマが指定した単語を文字列の配列から検索するメソッドが、その単語を発見できない。
+ => 専用の例外を作成し、それを投げる。throw new InvalidDictionaryException("単語○○が登録されていません。");
+
+・open メソッドへ指定されたファイルが存在しない。
+ => throw new FileNotFoundException("○○ファイルが見つかりません");
+
+・open メソッドへ指定されたファイルは存在するが、セキュリティにより使用できない。
+ => throw new AccessControlException("○○ファイルが開けません");
+
+・リモートのサーパプロセスにネットワークコネクションを確立しようとするが、リモートのマシンと接続
+できない。
+ => throw new BindException("IP:○○にコネクションが確立できません");
+
+・リモートのサーバプロセスとのやり取りの最中に、ネットワークコネクションが切れる。
+ => throw new SocketException("IP:○○とのコネクションが途切れました");
+    (throw new SocketTimeOutException("IP:○○とのコネクションがタイムアウトしました");
