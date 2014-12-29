@@ -1,0 +1,30 @@
+package ex14_03;
+
+class SafetyAdder {
+	int num;
+
+	public SafetyAdder(int num) {
+		this.num = num;
+	}
+
+	public void addPrint() {
+		int buf = num;
+
+		try {
+			Thread.currentThread().sleep(2);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		buf++;
+		num = buf;
+		System.out.printf("%s add: %12d%n", Thread.currentThread().getName(), num);
+	}
+
+	public static void main(String []args) {
+		SafetyAdder adder = new SafetyAdder(10);
+		adder.addPrint();
+		adder.addPrint();
+		adder.addPrint();
+	}
+}

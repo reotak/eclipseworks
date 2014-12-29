@@ -1,0 +1,186 @@
+package clock1_4;
+
+import java.awt.Choice;
+import java.awt.Color;
+import java.awt.Dialog;
+import java.awt.Font;
+import java.awt.Frame;
+import java.awt.GraphicsEnvironment;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Label;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+
+public class SettingDialog extends Dialog implements WindowListener{
+	private String fontName;
+	private int fontSize = 72;
+	private Color fontColor;
+	private Color groundColor;
+
+	private Choice fontNameChoice = null;
+	private Choice fontSizeChoice = null;
+	private Choice fontColorChoice = null;
+	private Choice groundColorChoice = null;
+
+	public SettingDialog(Frame frame, String title, String fontName, int fontSize, Color fontColor, Color groundColor) {
+		super(frame, title);
+		this.fontName = fontName;
+		this.fontSize = fontSize;
+		this.fontColor = fontColor;
+		this.groundColor = groundColor;
+
+		this.setSize(300, 300);
+		//this.setResizable(false);
+		this.addWindowListener(this);
+
+		GridBagLayout layout =new GridBagLayout();
+		GridBagConstraints c = new GridBagConstraints();
+		this.setLayout(layout);
+
+		Label fontNameLabel = new Label("Font Name");
+		c.gridx = 0;
+		c.gridy = 0;
+		layout.setConstraints(fontNameLabel, c);
+		this.add(fontNameLabel);
+
+
+		fontNameChoice = createFontNameChoice();
+		c.gridx = 1;
+		c.gridy = 0;
+		layout.setConstraints(fontNameChoice, c);
+		this.add(fontNameChoice);
+
+		Label fontSizeLabel = new Label("Font Size: ");
+		c.gridx = 0;
+		c.gridy = 1;
+		layout.setConstraints(fontSizeLabel, c);
+		this.add(fontSizeLabel);
+
+
+		fontSizeChoice = createFontSizeChoice();
+		c.gridx = 1;
+		c.gridy = 1;
+		layout.setConstraints(fontSizeChoice, c);
+		this.add(fontSizeChoice);
+
+		this.add(new Label("Font Color: "));
+		fontColorChoice = createFontColorChoice();
+		this.add(fontColorChoice);
+
+		this.add(new Label("Ground Color: "));
+		groundColorChoice = createGroundColorChoice();
+		this.add(groundColorChoice);
+
+
+	}
+
+	public void windowClosing(WindowEvent event) {
+		this.dispose();
+	}
+	public void windowOpened(WindowEvent e) {
+	}
+	public void windowClosed(WindowEvent e) {
+	}
+	public void windowIconified(WindowEvent e) {
+	}
+	public void windowDeiconified(WindowEvent e) {
+	}
+	public void windowActivated(WindowEvent e) {
+	}
+	public void windowDeactivated(WindowEvent e) {
+	}
+
+	private Choice createFontNameChoice() {
+		Choice c = new Choice();
+
+		for (Font f : GraphicsEnvironment.getLocalGraphicsEnvironment().getAllFonts()) {
+			c.addItem(f.getName());
+		}
+		return c;
+	}
+
+	private Choice createFontSizeChoice() {
+		Choice c = new Choice();
+		int[] sizes = new int[]{72, 144, 288, 576};
+		for (Integer s : sizes) {
+			c.addItem(s.toString());
+		}
+		return c;
+	}
+
+	private Choice createFontColorChoice() {
+		Choice c = new Choice();
+		c.addItem("Black");
+		c.addItem("Blue");
+		c.addItem("Red");
+		c.addItem("Yellow");
+		c.addItem("White");
+		return c;
+	}
+
+	private Choice createGroundColorChoice() {
+		Choice c = new Choice();
+		c.addItem("White");
+		c.addItem("Black");
+		c.addItem("Blue");
+		c.addItem("Red");
+		c.addItem("Yellow");
+		return c;
+	}
+
+
+	public String getFontName() {
+		return fontName;
+	}
+
+	public int getFontSize() {
+		return fontSize;
+	}
+
+	public Color getFontColor() {
+		return fontColor;
+	}
+	public Color getGroundColor() {
+		return groundColor;
+	}
+
+	private String getFontNameFromChoice() {
+		return fontNameChoice.getSelectedItem();
+	}
+
+	private int getFontSizeFromChoice() {
+		try {
+			return Integer.parseInt(fontSizeChoice.getSelectedItem());
+		} catch (Exception e) {
+			assert false : "フォントサイズに数字としてパースできない値が設定されていました";
+			return -1;
+		}
+	}
+
+	private Color getFontColorFromChoice() {
+		return colorStringToColor(fontColorChoice.getSelectedItem());
+	}
+
+	private Color getGroundColorFromChoice() {
+		return colorStringToColor(groundColorChoice.getSelectedItem());
+	}
+
+	private Color colorStringToColor(String s) {
+		switch(s) {
+		case "White" :
+			return Color.WHITE;
+		case "Black" :
+			return Color.BLACK;
+		case "Blue" :
+			return Color.BLUE;
+		case "Red" :
+			return Color.RED;
+		case "Yellow" :
+			return Color.YELLOW;
+		default:
+			return Color.BLACK;
+		}
+	}
+
+}

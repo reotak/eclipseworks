@@ -1,0 +1,13 @@
+package ex14_02;
+
+import org.junit.Test;
+
+public class PrintServerTest {
+
+	@Test(expected = RuntimeException.class)
+	public void test() {
+		PrintServer server = new PrintServer();
+		server.run();
+	}
+
+}

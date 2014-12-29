@@ -1,0 +1,12 @@
+package ex14_02;
+
+class PrintQueue {
+
+	public void add(PrintJob job) {
+
+	}
+
+	public PrintJob remove() {
+		return null;
+	}
+}

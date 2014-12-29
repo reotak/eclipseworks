@@ -1,0 +1,25 @@
+package ex14_02;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class PrintServerTest {
+
+	@Test
+	public void test_run_IllegalCalled() {
+		PrintServer server = new PrintServer();
+		try {
+			server.run();
+			fail();
+		} catch (RuntimeException e) {
+			System.out.println(e.toString());
+			if (e.toString() != "このメソッドは外部からの呼び出し禁止です") {
+				fail();
+			}
+		} catch (Exception e) {
+			fail();
+		}
+	}
+
+}

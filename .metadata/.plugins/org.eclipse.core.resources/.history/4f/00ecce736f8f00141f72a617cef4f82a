@@ -1,0 +1,35 @@
+package ex14_06;
+
+import java.util.List;
+
+public class TimeDisplay implements Runnable {
+	List<Object> notifyTos = null;
+
+	public TimeDisplay() {
+		this(null);
+	}
+
+	public TimeDisplay(List<Object> notifyTo) {
+		this.notifyTos = notifyTo;
+	}
+
+	public synchronized void run() {
+		int time = 0;
+		for (;;) {
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+
+			if (notifyTos != null) {
+				for (Object notifyTo : notifyTos) {
+					notifyTo.notifyAll(); // 一秒経過したことを通知
+				}
+			}
+			System.out.println(" Time Display : " + time++);
+		}
+	}
+
+
+}

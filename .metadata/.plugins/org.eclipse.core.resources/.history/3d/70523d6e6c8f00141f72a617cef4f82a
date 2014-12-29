@@ -1,0 +1,40 @@
+package ex14_06;
+
+public class TimeDisplay implements Runnable {
+
+	public synchronized void run() {
+		int time = 0;
+		for (;;) {
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			notifyAll(); // 一秒経過したことを通知
+			System.out.println(" Time Display : " + time++);
+		}
+	}
+
+	public synchronized void messagePrint15() {
+		int notifyCounter = 0;
+		System.out.println("notify counter :" + notifyCounter);
+		for (;;) {
+			while (notifyCounter < 15) {
+				System.out.println("wait");
+				try {
+					wait();
+				} catch(InterruptedException e) {
+					System.out.println("error");
+					e.printStackTrace();
+				}
+				System.out.println("awake");
+			}
+			notifyCounter++;
+
+			if (notifyCounter >= 15) {
+				System.out.println("15 sec!!");
+				notifyCounter = 0;
+			}
+		}
+	}
+}

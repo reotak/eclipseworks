@@ -1,0 +1,23 @@
+package ex14_03;
+
+class SafetyAdder {
+	int num;
+
+	public SafetyAdder(int num) {
+		this.num = num;
+	}
+
+	public void addPrint() {
+		int buf = num;
+		buf++;
+		num = buf;
+		System.out.printf("%8d%n", num);
+	}
+
+	public static void main(String []args) {
+		SafetyAdder adder = new SafetyAdder(10);
+		adder.addPrint();
+		adder.addPrint();
+		adder.addPrint();
+	}
+}

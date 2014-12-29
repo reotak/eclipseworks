@@ -1,0 +1,18 @@
+package ex14_03;
+
+class SafetyAdderRunner implements Runnable {
+	final SafetyAdder adder;
+	boolean isRan = false;
+
+	public SafetyAdderRunner(MyNumber num) {
+		adder = new SafetyAdder(num);
+	}
+
+	public void run() {
+		if (isRan == false) {
+			adder.add(1000000);
+			isRan = true;
+		}
+
+	}
+}

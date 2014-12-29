@@ -1,0 +1,18 @@
+package ex14_06;
+
+public class TimeDisplay implements Runnable {
+
+	public synchronized void run() {
+		int time = 0;
+		for (;;) {
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			notifyAll(); // 一秒経過したことを通知
+			System.out.println(" Time Display : " + time++);
+		}
+	}
+
+}

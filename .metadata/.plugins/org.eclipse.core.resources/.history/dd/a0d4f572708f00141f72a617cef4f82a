@@ -1,0 +1,37 @@
+package ex14_06;
+
+public class MessagePrinter implements Runnable {
+	final String message;
+	final int notifyCount;
+
+	public MessagePrinter(String message, int notifyCount) {
+		if (message == null) {
+			throw new IllegalArgumentException("want: message is not null");
+		}
+		if (notifyCount < 0) {
+			throw new IllegalArgumentException("want: notifyCount is not negative");
+		}
+		this.message = message;
+		this.notifyCount = notifyCount;
+	}
+
+	public synchronized void run() {
+		int notifyCounter = 0;
+		System.out.println("notify counter :" + notifyCounter);
+		for (;;) {
+			while (notifyCounter < notifyCount) {
+				System.out.println("wait");
+				try {
+					wait();
+				} catch(InterruptedException e) {
+					System.out.println("error");
+					e.printStackTrace();
+				}
+				System.out.println("awake");
+			}
+			notifyCounter++;
+
+			System.out.println(message);
+		}
+	}
+}

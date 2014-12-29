@@ -1,0 +1,21 @@
+package ex14_06;
+
+import java.util.ArrayList;
+import java.util.List;
+
+class Program {
+	public static void main(String []args) {
+		MessagePrinter mp15 = new MessagePrinter("15sec!!", 15);
+		MessagePrinter mp7  = new MessagePrinter(" 7sec!!",  7);
+
+		List<Object> notifyList = new ArrayList<Object>();
+		notifyList.add(mp15);
+		notifyList.add(mp7);
+
+		new Thread(mp15, "15sec message").start();
+		new Thread(mp7,  " 7sec message").start();
+		new TimeDisplay().run();
+
+
+	}
+}

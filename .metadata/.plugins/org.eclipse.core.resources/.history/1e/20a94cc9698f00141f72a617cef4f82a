@@ -1,0 +1,9 @@
+package ex14_06;
+
+class Program {
+	public static void main(String []args) {
+		Thread timeDisplay = new Thread(new TimeDisplay(), "Time Display");
+		timeDisplay.start();
+		new Thread(timeDisplay.getThreadGroup(), new MessagePrinter(), "Message Printer").start();
+	}
+}

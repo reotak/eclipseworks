@@ -1,0 +1,7 @@
+package ex14_06;
+
+class Program {
+	public static void main(String []args) {
+		new Thread(new TimeDisplay(), "Time Display");
+	}
+}

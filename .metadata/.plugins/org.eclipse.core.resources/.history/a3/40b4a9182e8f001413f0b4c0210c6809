@@ -1,0 +1,13 @@
+package ex14_02;
+
+import org.junit.Test;
+
+public class PrintServerTest {
+
+	@Test
+	public void test_run_IllegalCalled() {
+		PrintServer server = new PrintServer();
+		server.run();
+	}
+
+}

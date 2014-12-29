@@ -1,0 +1,109 @@
+package clock1_4;
+
+import java.awt.Choice;
+import java.awt.Dialog;
+import java.awt.Font;
+import java.awt.Frame;
+import java.awt.GraphicsEnvironment;
+import java.awt.GridBagLayout;
+import java.awt.Label;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+
+public class SettingDialog extends Dialog implements WindowListener{
+	private Choice fontNameChoice = null;
+	private Choice fontSizeChoice = null;
+	private Choice fontColorChoice = null;
+	private Choice groundColorChoice = null;
+
+	public SettingDialog(Frame frame, String title) {
+		super(frame, title);
+		this.setSize(300, 300);
+		this.setResizable(false);
+		this.addWindowListener(this);
+
+		this.setLayout(new GridBagLayout());
+
+		this.add(new Label("Font Name: "));
+		fontNameChoice = createFontNameChoice();
+		this.add(fontNameChoice);
+		this.add(new Label("Font Size: "));
+		fontSizeChoice = createFontSizeChoice();
+		this.add(fontSizeChoice);
+		this.add(new Label("Font Color: "));
+		fontColorChoice = createFontColorChoice();
+		this.add(fontColorChoice);
+		this.add(new Label("Ground Color: "));
+		groundColorChoice = createGroundColorChoice();
+		this.add(groundColorChoice);
+	}
+
+	public void windowClosing(WindowEvent event) {
+		this.dispose();
+	}
+	public void windowOpened(WindowEvent e) {
+	}
+	public void windowClosed(WindowEvent e) {
+	}
+	public void windowIconified(WindowEvent e) {
+	}
+	public void windowDeiconified(WindowEvent e) {
+	}
+	public void windowActivated(WindowEvent e) {
+	}
+	public void windowDeactivated(WindowEvent e) {
+	}
+
+	private Choice createFontNameChoice() {
+		Choice c = new Choice();
+
+		for (Font f : GraphicsEnvironment.getLocalGraphicsEnvironment().getAllFonts()) {
+			c.addItem(f.getName());
+		}
+		return c;
+	}
+
+	private Choice createFontSizeChoice() {
+		Choice c = new Choice();
+		int[] sizes = new int[]{72, 144, 288, 576};
+		for (Integer s : sizes) {
+			c.addItem(s.toString());
+		}
+		return c;
+	}
+
+	private Choice createFontColorChoice() {
+		Choice c = new Choice();
+		c.addItem("Black");
+		c.addItem("Blue");
+		c.addItem("Red");
+		c.addItem("Yellow");
+		c.addItem("White");
+		return c;
+	}
+
+	private Choice createGroundColorChoice() {
+		Choice c = new Choice();
+		c.addItem("White");
+		c.addItem("Black");
+		c.addItem("Blue");
+		c.addItem("Red");
+		c.addItem("Yellow");
+		return c;
+	}
+
+
+	public String getFontName() {
+
+	}
+
+	public int fontSizeChoice() {
+	}
+
+	public Color fontColorChoice() {
+	}
+	public Color groundColorChoice() {
+
+	}
+
+}

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;FreeFontClock.java&apos; to &apos;1_4/src/clock1_4&apos;&#x0D;&#x0A;- 元のプロジェクト: &apos;1_2&apos;&#x0D;&#x0A;- 宛先要素: &apos;1_4/src/clock1_4&apos;&#x0D;&#x0A;- オリジナル要素: &apos;clock1_2.FreeFontClock.java&apos;" description="コンパイル単位をコピー" destination="=1_4/src&lt;clock1_4" element1="/src&lt;clock1_2{FreeFontClock.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1419326281379" units="1" version="1.0"/>
+</session>

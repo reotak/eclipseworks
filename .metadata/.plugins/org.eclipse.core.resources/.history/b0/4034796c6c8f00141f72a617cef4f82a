@@ -1,0 +1,29 @@
+package ex14_06;
+
+public class MessagePrinter implements Runnable {
+
+	public synchronized void run() {
+		public synchronized void messagePrint15() {
+			int notifyCounter = 0;
+			System.out.println("notify counter :" + notifyCounter);
+			for (;;) {
+				while (notifyCounter < 15) {
+					System.out.println("wait");
+					try {
+						wait();
+					} catch(InterruptedException e) {
+						System.out.println("error");
+						e.printStackTrace();
+					}
+					System.out.println("awake");
+				}
+				notifyCounter++;
+
+				if (notifyCounter >= 15) {
+					System.out.println("15 sec!!");
+					notifyCounter = 0;
+				}
+			}
+		}
+	}
+}

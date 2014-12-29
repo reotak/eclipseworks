@@ -1,0 +1,13 @@
+package ex14_02;
+
+public class PrintJob {
+	String text;
+
+	PrintJob(String text) {
+		this.text = text;
+	}
+
+	public print() {
+		System.out.println(text);
+	}
+}

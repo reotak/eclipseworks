@@ -1,0 +1,25 @@
+package ex14_03;
+
+class SafetyAdder {
+	Integer target;
+
+	public SafetyAdder(Integer target) {
+		this.target = target;
+	}
+
+	public void add() {
+		Integer buf = target;
+		buf++;
+		target = buf;
+	}
+
+	public void add(int count) {
+		if (count < 0) {
+			throw new IllegalArgumentException("count is negative");
+		}
+
+		for (int i = 0; i < count; i++) {
+			add();
+		}
+	}
+}
