@@ -1,0 +1,27 @@
+package ex16_09;
+
+import static ex16_09.Util.*;
+
+import java.lang.reflect.Modifier;
+
+class FieldFormat {
+	final String name;
+	final int modifier;
+	final String type;
+
+	public FieldFormat(String name, int modifier, String type) {
+		this.name = name;
+		this.modifier = modifier;
+		this.type = type;
+	}
+
+	public String toString() {
+		String result = "";
+
+		result += type + " ";
+		result +=
+		result += name;
+
+		return result;
+	}
+}

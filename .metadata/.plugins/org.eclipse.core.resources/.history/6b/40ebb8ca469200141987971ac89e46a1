@@ -1,0 +1,26 @@
+package ex16_09;
+import static ex16_09.Util.*;
+
+class FieldFormat {
+	final String name;
+	final String modifier;
+	final String type;
+
+	public FieldFormat(String name, String modifier, String type) {
+		this.name = name;
+		this.modifier = modifier;
+		this.type = type;
+	}
+
+	public String toString() {
+		String result = "";
+
+		if (!isEmpty(modifier)) {
+			result += modifier + " ";
+		}
+		result += type + " ";
+		result += name;
+
+		return result;
+	}
+}

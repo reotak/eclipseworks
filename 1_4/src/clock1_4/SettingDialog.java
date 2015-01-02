@@ -11,6 +11,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Label;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
@@ -98,6 +100,11 @@ public class SettingDialog extends Dialog implements WindowListener {
 		this.add(groundColorChoice);
 
 		Button okButton = new Button("OK");
+		okButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				refrectNowSetting();
+			}
+		});
 		c.gridx = 1;
 		c.gridy = 4;
 		c.gridwidth = GridBagConstraints.RELATIVE;
@@ -106,6 +113,11 @@ public class SettingDialog extends Dialog implements WindowListener {
 		this.add(okButton);
 
 		Button cancelButton = new Button("CANCEL");
+		cancelButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 		c.gridx = 1;
 		c.gridy = 4;
 		c.gridwidth = GridBagConstraints.REMAINDER;
@@ -168,41 +180,53 @@ public class SettingDialog extends Dialog implements WindowListener {
 		return c;
 	}
 
-
 	public String getFontName() {
-		return fontName;
-	}
-
-	public int getFontSize() {
-		return fontSize;
-	}
-
-	public Color getFontColor() {
-		return fontColor;
-	}
-	public Color getGroundColor() {
-		return groundColor;
-	}
-
-	private String getFontNameFromChoice() {
-		return fontNameChoice.getSelectedItem();
-	}
-
-	private int getFontSizeFromChoice() {
-		try {
-			return Integer.parseInt(fontSizeChoice.getSelectedItem());
-		} catch (Exception e) {
-			assert false : "フォントサイズに数字としてパースできない値が設定されていました";
-			return -1;
+		if (this.isVisible()) {
+			return fontNameChoice.getSelectedItem();
+		} else {
+			return fontName;
 		}
 	}
 
-	private Color getFontColorFromChoice() {
-		return colorStringToColor(fontColorChoice.getSelectedItem());
+	public int getFontSize() {
+		if (this.isVisible()) {
+			try {
+				return Integer.parseInt(fontSizeChoice.getSelectedItem());
+			} catch (Exception e) {
+				assert false : "フォントサイズに数字としてパースできない値が設定されていました";
+				return -1;
+			}
+		} else {
+			return fontSize;
+		}
 	}
 
-	private Color getGroundColorFromChoice() {
-		return colorStringToColor(groundColorChoice.getSelectedItem());
+	public Color getFontColor() {
+		if (this.isVisible()) {
+			return colorStringToColor(fontColorChoice.getSelectedItem());
+		} else {
+			return fontColor;
+		}
+	}
+
+	public Color getGroundColor() {
+		if (this.isVisible()) {
+			return colorStringToColor(groundColorChoice.getSelectedItem());
+		} else {
+			return groundColor;
+		}
+	}
+
+	private void refrectNowSetting() {
+		fontName = fontNameChoice.getSelectedItem();
+		try {
+			fontSize = Integer.parseInt(fontSizeChoice.getSelectedItem());
+		} catch (Exception e) {
+			assert false : "フォントサイズに数字としてパースできない値が設定されていました";
+			fontSize = -1;
+		}
+		fontColor = colorStringToColor(fontColorChoice.getSelectedItem());
+		groundColor = colorStringToColor(groundColorChoice.getSelectedItem());
 	}
 
 	private Color colorStringToColor(String s) {

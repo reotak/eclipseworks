@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="メソッド &apos;private void createDoc()&apos; を &apos;ex14_09.ThreadGroupDisplay.runDisplay().new Runnable() {...}.run()&apos; から &apos;ex14_09.ThreadGroupDisplay.runDisplay().new Runnable() {...}&apos; へ抽出します&#x0D;&#x0A;- 元のプロジェクト: &apos;ch14&apos;&#x0D;&#x0A;- メソッド名: &apos;createDoc&apos;&#x0D;&#x0A;- 宛先タイプ: &apos;ex14_09.ThreadGroupDisplay.runDisplay().new Runnable() {...}&apos;&#x0D;&#x0A;- 宣言された可視性: &apos;private&apos;" comments="false" description="メソッド &apos;createDoc&apos; の抽出" destination="0" exceptions="false" flags="786434" id="org.eclipse.jdt.ui.extract.method" input="/&lt;ex14_09{ThreadGroupDisplay.java" name="createDoc" replace="false" selection="375 287" stamp="1420109190528" version="1.0" visibility="2"/>
+</session>

@@ -1,0 +1,8 @@
+package ex16_09;
+
+enum Accesser {
+	public,
+	protected,
+	private,
+	none
+}

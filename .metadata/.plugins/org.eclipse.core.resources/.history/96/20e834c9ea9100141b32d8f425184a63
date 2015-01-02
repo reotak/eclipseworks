@@ -1,0 +1,47 @@
+package ex16_09;
+
+import java.util.List;
+
+class ClassFormat {
+	final String name;
+	final String superName;
+	final List<String> interfaces;
+	final List<String> fields;
+	final List<String> methods;
+
+	public ClassFormat(String name, String superName, List<String> interfaces,
+			List<String> fields, List<String> methods) {
+		this.name = name;
+		this.superName = superName;
+		this.interfaces = interfaces;
+		this.fields = fields;
+		this.methods = methods;
+	}
+
+	public String toString() {
+		
+		return null;
+	}
+
+	public boolean isEmpty(String str) {
+		return str != null && str.length() == 0;
+	}
+	
+	public String insertString(String insert, String... strs) {
+		String result = "";
+
+		boolean isFirst = true;
+		for (String s : strs) {
+			if (isFirst) {
+				isFirst = false;
+			} else {
+				result += insert;
+			}
+
+			result += s;
+		}
+
+		return result;
+	}
+
+}

@@ -1,0 +1,20 @@
+package ex16_04;
+
+import java.lang.annotation.Annotation;
+
+class AnnotationReader {
+
+	public static void printAnnotation(Class<?> src) {
+		for (Annotation ano : src.getDeclaredAnnotations()) {
+			System.out.println(ano.toString());
+		}
+	}
+
+	public static void main(String[] args) {
+		try {
+			printAnnotation(Class.forName("java.awt.Frame"));
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+}

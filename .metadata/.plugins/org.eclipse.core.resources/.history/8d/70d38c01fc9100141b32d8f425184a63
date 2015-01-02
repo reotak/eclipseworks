@@ -1,0 +1,55 @@
+package ex16_09;
+
+import java.lang.reflect.Modifier;
+import java.util.ArrayList;
+import java.util.List;
+
+class Util {
+	public static boolean isEmpty(String str) {
+		return str != null && str.length() == 0;
+	}
+
+	public static String insertString(String insert, String... strs) {
+		if (strs == null) {
+			return "";
+		}
+
+		List<String> list = new ArrayList<String>();
+
+		for (String s : strs) {
+			list.add(s);
+		}
+
+		return insertString(insert, list);
+	}
+
+	public static String insertString(String insert, List<?> list) {
+		if (list == null) {
+			return "";
+		}
+
+		String result = "";
+
+		boolean isFirst = true;
+		for (Object o : list) {
+			if (isFirst) {
+				isFirst = false;
+			} else {
+				result += insert;
+			}
+
+			if (o != null) {
+				result += o.toString();
+			}
+		}
+
+		return result;
+	}
+
+	public static Accesser getAccesser(int modifier) {
+		return Modifier.isPrivate(mod) ? Accesser.PRIVATE :
+			Modifier.isProtected(mod) ? Accesser.PROTECTED :
+				Modifier.isPublic(mod) ? Accesser.PUBLIC :
+					Accesser.NONE;
+	}
+}

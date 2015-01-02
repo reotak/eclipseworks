@@ -1,0 +1,37 @@
+package ex16_09;
+
+import java.util.ArrayList;
+import java.util.List;
+
+class Util {
+	public static boolean isEmpty(String str) {
+		return str != null && str.length() == 0;
+	}
+
+	public static String insertString(String insert, String... strs) {
+		List<String> list = new ArrayList<String>();
+
+		for (String s : strs) {
+			list.add(s);
+		}
+
+		return insertString(insert, list);
+	}
+
+	public static String insertString(String insert, List<?> list) {
+		String result = "";
+
+		boolean isFirst = true;
+		for (Object o : list) {
+			if (isFirst) {
+				isFirst = false;
+			} else {
+				result += insert;
+			}
+
+			result += o.toString();
+		}
+
+		return result;
+	}
+}

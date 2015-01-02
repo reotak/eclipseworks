@@ -1,0 +1,9 @@
+package ex16_9;
+
+class ClassFormat {
+	final String name;
+	final String superName;
+	final List<String> interfaces;
+	final List<Method> methods;
+	final List<Field> field;
+}

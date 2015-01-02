@@ -1,0 +1,72 @@
+package ex16_09;
+
+import static ex16_09.Util.*;
+
+import java.util.List;
+
+class ClassFormat {
+	final String name;
+	final Accesser accesser;
+	final boolean isStatic;
+	final String superName;
+	final List<String> interfaces;
+	final List<ClassFormat> innerClasses;
+	final List<String> fields;
+	final List<String> methods;
+
+	public ClassFormat(String name, Accesser accesser, boolean isStatic, String superName,  List<String> interfaces,
+			List<ClassFormat> innerClasses, List<String> fields, List<String> methods) {
+		this.name = name;
+		this.accesser = accesser;
+		this.isStatic = isStatic;
+		this.superName = superName;
+		this.interfaces = interfaces;
+		this.innerClasses = innerClasses;
+		this.fields = fields;
+		this.methods = methods;
+	}
+
+	public String toString() {
+		String result = "";
+
+		// public static class Name
+		result += isEmpty(accesser.toString()) ? "" : accesser.toString() + " ";
+		result += isStatic ? "static " : "";
+		result += "class ";
+		result += name;
+		result += " ";
+
+		// extends Super
+		if (!isEmpty(superName)) {
+			result += "extends ";
+			result += superName;
+			result += " ";
+		}
+
+		// implements inteface1, interface2 ...
+		if (interfaces.size() >= 1) {
+			result += "implements ";
+			result += insertString(", ", interfaces);
+			result += " ";
+		}
+
+		result += " {%n";
+
+		if (innerClasses != null) {
+			 result += insertString(";%n", innerClasses);
+			 result += ";%n";
+		}
+
+		// field
+		result += insertString("%n", fields);
+		result += "%n";
+
+		// method
+		result += insertString("%n", methods);
+		result += "%n";
+
+		result += "}";
+
+		return result;
+	}
+}

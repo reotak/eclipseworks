@@ -1,0 +1,73 @@
+package ex16_09;
+
+import static ex16_09.Util.*;
+
+import java.util.List;
+
+class ClassFormat {
+	final String name;
+	final String modifier;
+	final String superName;
+	final List<String> interfaces;
+	final List<ClassFormat> innerClasses;
+	final List<FieldFormat> fields;
+	final List<MethodFormat> methods;
+
+	public ClassFormat(String name, String modifier, String superName,  List<String> interfaces,
+			List<ClassFormat> innerClasses, List<FieldFormat> fields, List<MethodFormat> methods) {
+		this.name = name;
+		this.modifier = modifier;
+		this.superName = superName;
+		this.interfaces = interfaces;
+		this.innerClasses = innerClasses;
+		this.fields = fields;
+		this.methods = methods;
+	}
+
+	public String toString() {
+		String result = "";
+
+		// public static class Name
+		result += modifier;
+		result += name;
+		result += " ";
+
+		// extends
+		if (!isEmpty(superName)) {
+			result += "extends ";
+			result += superName;
+			result += " ";
+		}
+
+		// implements
+		if (interfaces != null && interfaces.size() >= 1) {
+			result += "implements ";
+			result += insertString(", ", interfaces);
+			result += " ";
+		}
+
+		result += " {\n";
+
+		// innerClass
+		if (innerClasses != null && innerClasses.size() != 0) {
+			 result += insertString(";\n", innerClasses);
+			 result += ";\n";
+		}
+
+		// field
+		if (fields != null && fields.size() != 0) {
+			result += insertString(";\n", fields);
+			result += ";\n";
+		}
+
+		// method
+		if (methods != null && methods.size() != 0) {
+			result += insertString(";\n", methods);
+			result += ";\n";
+		}
+
+		result += "}";
+
+		return result;
+	}
+}

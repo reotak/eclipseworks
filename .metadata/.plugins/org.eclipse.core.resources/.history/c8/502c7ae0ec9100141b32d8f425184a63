@@ -1,0 +1,24 @@
+package ex16_09;
+
+class Util {
+	public static boolean isEmpty(String str) {
+		return str != null && str.length() == 0;
+	}
+
+	public static String insertString(String insert, String... strs) {
+		String result = "";
+
+		boolean isFirst = true;
+		for (String s : strs) {
+			if (isFirst) {
+				isFirst = false;
+			} else {
+				result += insert;
+			}
+
+			result += s;
+		}
+
+		return result;
+	}
+}

@@ -1,0 +1,16 @@
+package ex16_9;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.util.List;
+
+class ClassFormat {
+	final String name;
+	final String superName;
+	final List<String> interfaces;
+	final List<Method> methods;
+	final List<Field> field;
+
+
+
+}

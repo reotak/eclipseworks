@@ -1,0 +1,5 @@
+package ex16_09;
+
+public class ForTest_GenericsClass<T1, T2> {
+
+}

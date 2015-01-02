@@ -1,0 +1,27 @@
+package ex16_09;
+
+import static ex16_09.Util.*;
+
+class FieldFormat {
+	final String name;
+	final int modifier;
+	final String type;
+
+	public FieldFormat(String name, int modifier, String type) {
+		this.name = name;
+		this.modifier = modifier;
+		this.type = type;
+	}
+
+	public String toString() {
+		String result = "";
+
+		result += isEmpty(getAccesser(modifier).toString()) ? "" : getAccesser(modifier).toString() + " ";
+		result += isStatic ? "static " : "";
+		result += isVolatile ? "volatile " : "";
+		result += type + " ";
+		result += name;
+
+		return result;
+	}
+}

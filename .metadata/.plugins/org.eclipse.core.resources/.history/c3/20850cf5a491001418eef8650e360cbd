@@ -1,0 +1,69 @@
+package ex14_09;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+class ThreadGroupDisplay {
+
+	public static Thread runDisplay(final ThreadGroup g) {
+		return new Thread(new Runnable() {
+			public void run() {
+				for (;;) {
+					Document doc = createDoc();
+
+					
+					
+					
+					Element elem = doc.createElement(g.getName());
+					doc.appendChild(elem);
+
+					ThreadGroup[] groups = new ThreadGroup[100];
+					Thread[] threads = new Thread[100];
+
+					int depth = 1;
+					int countG = g.enumerate(groups, false);
+					for (int i = 0; i < countG; i++) {
+						Element e = doc.createElement("ThreadGroup");
+						e.setAttribute("name", groups[i].getName());
+						elem.appendChild(e);
+					}
+
+					int countT = g.enumerate(threads, false);
+					for (int i = 0; i < countT; i++) {
+						for (int d = 0; d < depth; d++) {
+							System.out.print("\t");
+						}
+						System.out.println(" - [T] " + threads[i].getName());
+					}
+
+					try {
+						Thread.sleep(100);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+
+			private Document createDoc() {
+				DocumentBuilder documentBuilder = null;
+				try {
+					documentBuilder = DocumentBuilderFactory.newInstance()
+							.newDocumentBuilder();
+				} catch (ParserConfigurationException e) {
+					e.printStackTrace();
+				}
+				return documentBuilder.newDocument();
+			}
+		});
+
+	}
+
+	public static void main(String[] args) {
+		runDisplay(Thread.currentThread().getThreadGroup()).start();
+
+	}
+}

@@ -1,0 +1,33 @@
+package ex16_01;
+
+import java.lang.reflect.*;
+
+class TypeDesc {
+	public static void main(String[] args) {
+		TypeDesc desc = new TypeDesc();
+		for (String name : args) {
+			try {
+				Class<?> startClass = Class.forName(name);
+				desc.printType(startClass, 0, basic);
+			} catch (ClassNotFoundException e) {
+				System.err.println(e);
+			}
+		}
+	}
+
+	private java.io.PrintStream out = System.out;
+
+	private static String[]
+			basic = {"class", "interface", "enum", "annotation"},
+			supercl = {"extends", "implements"},
+			iFace = {null, "extends"};
+
+	private void printType(Type type, int depth, String[] labels) {
+		if (type == null) {
+			return;
+		}
+
+		Class<?> cls = null;
+		if (type instanceof Class<?>)
+	}
+}

@@ -1,0 +1,14 @@
+package ex16_09;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class UtilTest {
+
+	@Test
+	public void testInsertString() {
+		assertEquals("Hello, World, .", Util.insertString(", ", "Hello", "World", "."));
+	}
+
+}

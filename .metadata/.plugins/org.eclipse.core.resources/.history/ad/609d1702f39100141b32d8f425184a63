@@ -1,0 +1,38 @@
+package ex16_09;
+
+import static org.junit.Assert.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.Test;
+
+public class ClassFormatTest {
+
+	@Test
+	public void testToString() {
+		List<String> interfaces = new ArrayList<String>();
+		interfaces.add("interface1");
+		interfaces.add("interface2");
+
+		List<String> fields = new ArrayList<String>();
+		fields.add("private final int f1");
+		fields.add("public static volatile Object f2");
+
+		List<String> methods = new ArrayList<String>();
+		methods.add("private static List<String> function1(String... args)");
+		methods.add("public function2(final String s, int num)");
+
+		List<ClassFormat> innerClasses = new ArrayList<ClassFormat>();
+		innerClasses.add(new ClassFormat(
+				"Inner", Accesser.NONE, true, null, null,
+				null, fields, null));
+
+		ClassFormat cf = new ClassFormat(
+				"Test", Accesser.PUBLIC, false, "Parent",  interfaces,
+				innerClasses, fields, methods);
+		
+		System.out.println(cf);
+	}
+
+}

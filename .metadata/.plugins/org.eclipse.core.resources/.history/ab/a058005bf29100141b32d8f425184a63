@@ -1,0 +1,24 @@
+package ex16_09;
+
+import static org.junit.Assert.*;
+
+import java.util.List;
+
+import org.junit.Test;
+
+public class ClassFormatTest {
+
+	@Test
+	public void testToString() {
+		List<String> interfaces = new ArrayList<String>() {
+			"interface1",
+			"interface2"
+		};
+
+
+		ClassFormat cf = new ClassFormat(
+				"Test", Accesser.PUBLIC, false, "Parent",  interfaces,
+				List<ClassFormat> innerClass, List<String> fields, List<String> methods) {
+	}
+
+}

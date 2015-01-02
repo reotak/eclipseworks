@@ -1,0 +1,85 @@
+package ex16_09;
+
+import static ex16_09.Util.*;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
+
+class DeclarationSearcher {
+	public static List<? extends List<Integer>> [][]list;
+
+	public static KeyValuePair<? extends List<Integer>, ? extends String>[][] toList(KeyValuePair<? extends List<Integer>, ? extends String>[][]... list)
+			throws IllegalArgumentException {
+
+		return list[0];
+	}
+
+	public static String search(String className) {
+		String result = "";
+
+		Class<?> c;
+		try {
+			c = Class.forName(className);
+		} catch (ClassNotFoundException e) {
+			System.err.println("Class Not Found");
+			return "";
+		}
+
+		return search(c);
+	}
+
+	public static String search(Class<?> c) {
+		String result = "";
+
+		System.out.println("class:" + typeToString(c));
+		System.out.println("  mod:" + modifierToString(c.getModifiers(), true));
+		System.out.println("   su:" + typeToString(c.getSuperclass()));
+		for (Type t: c.getGenericInterfaces()) {
+			System.out.println("   IF:" + typeToString(t));
+		}
+		for (Class<?> inner : c.getDeclaredClasses()) {
+			search(inner);
+		}
+
+		List<FieldFormat> fields = new ArrayList<FieldFormat>();
+		for (Field f : c.getDeclaredFields()) {
+			fields.add(new FieldFormat(
+				f.getName(),
+				typeToString(f.getGenericType()),
+				modifierToString(f.getModifiers())));
+			System.out.println("  field:" + fields.get(fields.size() - 1).toString());
+		}
+
+		List<MethodFormat> methods = new ArrayList<MethodFormat>();
+		for (Method m : c.getDeclaredMethods()) {
+			List<String> params = new ArrayList<String>();
+			for (Type t : m.getGenericParameterTypes()) {
+				params.add(typeToString(t));
+			}
+			
+			List<String> exceptions = new ArrayList<String>();
+			for (Type t : m.getGenericExceptionTypes()) {
+				exceptions.add(typeToString(t));
+			}
+			methods.add(new MethodFormat(
+					m.getName(),
+					typeToString(m.getGenericReturnType()),
+					modifierToString(m.getModifiers()),
+					params,
+					exceptions));
+			System.out.println(methods.get(methods.size() - 1).toString());
+		}
+
+		return result;
+	}
+
+	public static void main(String []args) {
+		search("java.awt.ActiveEvent");
+		search("java.lang.Integer");
+		search("java.util.ArrayList");
+		search("ex16_09.DeclarationSearcher");
+	}
+}
