@@ -1,0 +1,17 @@
+package intepret;
+
+import java.lang.reflect.Type;
+
+public class Constructor {
+	private Class<?> cls;
+	Type[] argsTypes;
+
+	public Constructor(Class<?> cls, Type[] argsTypes) {
+		this.cls = cls;
+		this.argsTypes = argsTypes;
+	}
+
+	public String toString() {
+		return "";
+	}
+}

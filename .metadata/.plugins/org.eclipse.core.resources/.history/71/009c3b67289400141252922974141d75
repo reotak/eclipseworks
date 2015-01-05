@@ -1,0 +1,12 @@
+package gui;
+
+import java.lang.reflect.Type;
+
+abstract class ArgumentsSetWindowManager implements CatchArguments {
+	public ArgumentsSetWindowManager(Type[] argTypes) {
+		ArgumentSetWindow window = new ArgumentSetWindow(argTypes, this);
+		window.setVisible(true);
+	}
+
+	abstract public void catchArguments(Object[] args);
+}

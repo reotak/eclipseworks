@@ -1,0 +1,46 @@
+package intepret;
+
+import java.lang.reflect.Field;
+
+public class InstanceField {
+	private String name;
+	private String value;
+	private String type;
+
+	public InstanceField(String name, String value, String type) {
+		this.name = name;
+		this.value = value;
+		this.type = type;
+	}
+
+	public final String getName() {
+		return name;
+	}
+
+	public final String getValue() {
+		return value;
+	}
+
+	public final String getType() {
+		return type;
+	}
+
+	public void setValue(Object target, Object value)
+			throws IllegalArgumentException, IllegalAccessException,
+			SecurityException, NoSuchFieldException {
+		Field f;
+
+		f = target.getClass().getDeclaredField(name);
+		f.setAccessible(true);
+		f.set(target, value);
+		this.value = value.toString();
+	}
+
+	public void setValue(IInstance ins, Object value) {
+		setValue(((Instance)ins).getObject(), value);
+	}
+
+	public String toString() {
+		return name + " -> " + value;
+	}
+}

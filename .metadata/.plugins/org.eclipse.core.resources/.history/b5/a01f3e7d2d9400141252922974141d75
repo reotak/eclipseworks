@@ -1,0 +1,58 @@
+package gui;
+
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+
+class SetArgumentsWindow extends JFrame {
+	private final java.lang.reflect.Type[] argTypes;
+	private final Object[] args;
+	private final JTable settingArgsTable;
+	private final JTextField targetArgTextField;
+	private final InstanceViewer instanceViewer;
+	private final JTable instanceTable;
+	private final JTextField primaryTextField;
+	private final JComboBox<String> primaryComboBox;
+
+	public SetArgumentsWindow(java.lang.reflect.Type[] argTypes, CatchArguments to, InstanceViewer instanceViewer) {
+		this.setTitle("引数の設定");
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+		this.argTypes = argTypes;
+		this.instanceViewer = instanceViewer;
+
+		// argsを生成
+		this.args = new Object[argTypes.length];
+
+		// 設定済みの引数を表示するテーブル
+		JPanel settingArgsPanel = new JPanel();
+		settingArgsPanel.add(new JLabel("設定済みの引数"), BorderLayout.NORTH);
+		settingArgsTable = new JTable(new DefaultTableModel(new String[] {"型", "値"}, 0) {
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		});
+
+		for (int i = 0; i < argTypes.length; i++) {
+			((DefaultTableModel)settingArgsTable.getModel()).addRow(
+				new String[] { intepret.Util.typeToString(argTypes[i]), "未設定" });
+		}
+		JScrollPane sp = new JScrollPane(settingArgsTable);
+		sp.setPreferredSize(new Dimension(450, 700));
+		settingArgsTable.doLayout();
+		settingArgsPanel.add(settingArgsTable);
+
+		targetArgTextField = null;
+		instanceTable = null;
+		primaryComboBox = null;
+		primaryTextField = null;
+	}
+}

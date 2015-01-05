@@ -1,0 +1,41 @@
+package intepret;
+
+import java.lang.reflect.Constructor;
+import java.util.ArrayList;
+import java.util.List;
+
+class ObjectCreater {
+	Class<?> cls;
+	Object object;
+
+	public ObjectCreater(String className) throws ClassNotFoundException,
+			InstantiationException, IllegalAccessException {
+		this.cls = Class.forName(className);
+	}
+
+	public List<intepret.Constructor> getConstructorList() {
+		List<intepret.Constructor> cs = new ArrayList<intepret.Constructor>();
+		for (Constructor<?> c : cls.getDeclaredConstructors()) {
+			cs.add(new intepret.Constructor(
+					cls,
+					c.getGenericParameterTypes()));
+		}
+
+		return cs;
+	}
+
+
+	public static void main(String[] args) {
+		ObjectCreater o = null;
+		try {
+			o = new ObjectCreater("java.awt.Frame");
+		} catch (ClassNotFoundException | InstantiationException
+				| IllegalAccessException e) {
+			e.printStackTrace();
+			System.exit(0);
+		}
+		for (intepret.Constructor c : o.getConstructorList()) {
+			System.out.println(c);
+		}
+	}
+}

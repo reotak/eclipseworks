@@ -1,0 +1,28 @@
+package intepret;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.List;
+
+class InstanceCreater {
+	private Class<?> cls;
+
+	public InstanceCreater(String className) throws ClassNotFoundException,
+			InstantiationException, IllegalAccessException {
+		this.cls = Class.forName(className);
+	}
+
+	public List<intepret.Constructor> getConstructorList() {
+		List<intepret.Constructor> cs = new ArrayList<intepret.Constructor>();
+		for (Constructor<?> c : cls.getDeclaredConstructors()) {
+			cs.add(new intepret.Constructor(c, c.getGenericParameterTypes()));
+		}
+
+		return cs;
+	}
+
+	public Instance createInstance(String instanceId, intepret.Constructor con, List<Object> args) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		return new Instance(instanceId, con, args);
+	}
+}

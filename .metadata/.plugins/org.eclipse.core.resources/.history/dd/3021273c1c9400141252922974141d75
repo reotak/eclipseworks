@@ -1,0 +1,68 @@
+package gui;
+
+import intepret.IConstructor;
+
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+public class CreateInstanceDialog extends JFrame {
+	JTable table;
+	InstanceViewer instanceViewer;
+
+	public CreateInstanceDialog(InstanceViewer instanceViewer, List<IConstructor> cons) {
+		this.instanceViewer  = instanceViewer ;
+
+		this.setTitle("実行するコンストラクタの選択");
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+		// モデルを生成する
+		DefaultTableModel model = new DefaultTableModel(columnNames, 0) {
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
+
+		// このテーブルに表示する内容を設定する
+		model.addColumn(new String[] { "コンストラクタ"} );
+		for (IConstructor con : cons) {
+			model.addRow(new String[] {con.getName()});
+		}
+
+
+		// テーブルを表示するための設定
+		this.setBounds(10, 10, 500, 800);
+		table = new JTable(model);
+		JScrollPane sp = new JScrollPane(table);
+		sp.setPreferredSize(new Dimension(450, 700));
+		table.doLayout();
+		JPanel tablePanel = new JPanel();
+		tablePanel.add(sp);
+		getContentPane().add(tablePanel, BorderLayout.CENTER);
+
+		JPanel buttonPannel = new JPanel();
+		JButton startButton = new JButton("決定");
+		startButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				openArgSettingDialog();
+			}
+		});
+		buttonPannel.add(startButton);
+
+		getContentPane().add(buttonPannel, BorderLayout.SOUTH);
+	}
+
+	private void openArgSettingDialog() {
+		int row = table.getSelectedRow();
+		System.out.println((String)((DefaultTableModel)table.getModel()).getValueAt(row, 0));
+	}
+}

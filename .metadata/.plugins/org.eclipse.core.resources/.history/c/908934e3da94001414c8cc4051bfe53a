@@ -1,0 +1,51 @@
+package intepret;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
+
+
+public class InstanceMethod {
+	private final Method m;
+	private final Object target;
+	private final String name;
+	private final String returnType;
+	private final List<String> argTypes = new ArrayList<String>();
+
+	public InstanceMethod(Method m, Object target) {
+		m.setAccessible(true);
+
+		this.m = m;
+		this.target = target;
+
+		name = m.getName();
+		returnType = Util.typeToString(m.getGenericReturnType());
+
+		for (Type param : m.getGenericParameterTypes()) {
+			argTypes.add(Util.typeToString(param));
+		}
+	}
+
+	public final String getName() {
+		return name;
+	}
+
+	public final String getReturnType() {
+		return returnType;
+	}
+
+	public final List<String> argTypes() {
+		return argTypes;
+	}
+
+	public Object invoke(Object[] values) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		m.setAccessible(true);
+		return m.invoke(target, values);
+	}
+
+	public String toString() {
+		return returnType + " " + name + "(" + Util.insertString(", ", argTypes) + ")";
+	}
+}

@@ -1,0 +1,99 @@
+package gui;
+
+import intepret.InstanceField;
+
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+public class FieldViewer extends JFrame {
+	private String[] columnNames = { "フィールド名", "値" };
+	private final DefaultTableModel model;
+	private final JTable table;
+	private final intepret.IInstance ins;
+	private final InstanceTableViewer instanceTable;
+
+	FieldViewer(intepret.IInstance ins, InstanceTableViewer instanceTable) {
+		this.ins = ins;
+		this.instanceTable = instanceTable;
+
+		this.setTitle(ins.getInstanceId());
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		this.setBounds(10, 10, 500, 800);
+
+		// モデルを生成する
+		model = new DefaultTableModel(columnNames, 0) {
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
+
+		// このテーブルに表示する内容を設定する
+		refresh();
+
+		// テーブルを表示するための設定
+		JPanel tablePanel = new JPanel();
+		table = new JTable(model);
+		JScrollPane sp = new JScrollPane(table);
+		sp.setPreferredSize(new Dimension(450, 700));
+		table.doLayout();
+		tablePanel.add(sp);
+		getContentPane().add(tablePanel, BorderLayout.CENTER);
+
+		JPanel buttonPannel = new JPanel();
+		// 更新ボタン
+		JButton renewButton = new JButton("更新");
+		renewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				refresh();
+			}
+		});
+		buttonPannel.add(renewButton);
+
+		JButton changeButton = new JButton("値の変更");
+		changeButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				openChangeValueDialog();
+			}
+		});
+		buttonPannel.add(changeButton);
+
+		getContentPane().add(buttonPannel, BorderLayout.SOUTH);
+	}
+
+	public void refresh() {
+		List<InstanceField> fields = this.ins.getFields();
+
+		for (int i = 0; i < model.getRowCount(); i++) {
+			model.removeRow(i);
+		}
+
+		for (int i = 0; i < fields.size(); i++) {
+			model.addRow(new String[] { fields.get(i).getName(),
+					fields.get(i).getValue() });
+		}
+	}
+
+	private void openChangeValueDialog() {
+		int row = table.getSelectedRow();
+		if (row == -1) {
+			JOptionPane.showMessageDialog(this, "行を選択してください");
+			return;
+		}
+		String name = (String)table.getModel().getValueAt(row, 0);
+		InstanceField f = ins.getField(name);
+
+		ChangeValueWindow dialog = new ChangeValueWindow(ins, f, instanceTable, this);
+		dialog.setVisible(true);
+	}
+}

@@ -1,0 +1,15 @@
+package intepret;
+
+import java.lang.reflect.Type;
+
+interface IConstructor {
+
+	public abstract java.lang.reflect.Constructor<?> getReflectConstructor();
+
+	public abstract Type[] getArgTypes();
+
+	public abstract String getName();
+
+	public abstract String toString();
+
+}

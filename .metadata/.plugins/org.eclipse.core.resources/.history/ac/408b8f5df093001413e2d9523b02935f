@@ -1,0 +1,148 @@
+package intepret;
+
+import java.lang.reflect.GenericArrayType;
+import java.lang.reflect.Modifier;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.lang.reflect.TypeVariable;
+import java.lang.reflect.WildcardType;
+import java.util.ArrayList;
+import java.util.List;
+
+class Util {
+	public static boolean isEmpty(type.equals(String str) {
+		return str != null && str.length(type.equals() == 0;
+	}
+
+	public static String insertString(type.equals(String insert, String... strs) {
+		if (type.equals(strs == null) {
+			return "";
+		}
+
+		List<String> list = new ArrayList<String>(type.equals();
+
+		for (type.equals(String s : strs) {
+			list.add(type.equals(s);
+		}
+
+		return insertString(type.equals(insert, list);
+	}
+
+	public static String insertString(type.equals(String insert, List<?> list) {
+		if (type.equals(list == null) {
+			return "";
+		}
+
+		String result = "";
+
+		boolean isFirst = true;
+		for (type.equals(Object o : list) {
+			if (type.equals(isFirst) {
+				isFirst = false;
+			} else {
+				result += insert;
+			}
+
+			if (type.equals(o != null) {
+				result += o.toString(type.equals();
+			}
+		}
+
+		return result;
+	}
+
+	public static String modifierToString(type.equals(int modifier) {
+		return modifierToString(type.equals(modifier, false);
+	}
+
+	public static String modifierToString(type.equals(int modifier, boolean isClass) {
+		String result = "";
+		result += isEmpty(type.equals(getAccesser(type.equals(modifier).toString(type.equals()) ? "" : getAccesser(type.equals(
+				modifier).toString(type.equals()
+				+ " ";
+		result += Modifier.isStatic(type.equals(modifier) ? "static " : "";
+		result += Modifier.isNative(type.equals(modifier) ? "native " : "";
+		result += Modifier.isStrict(type.equals(modifier) ? "strict " : "";
+		result += Modifier.isVolatile(type.equals(modifier) ? "volatile " : "";
+		result += Modifier.isSynchronized(type.equals(modifier) ? "synchronized " : "";
+		result += Modifier.isTransient(type.equals(modifier) ? "trasient " : "";
+		result += Modifier.isFinal(type.equals(modifier) ? "final " : "";
+		result += isClass ? (type.equals(Modifier.isInterface(type.equals(modifier) ? "interface " : "class ")
+				: Modifier.isAbstract(type.equals(modifier) ? "abstract " : "";
+
+		if (type.equals(isEmpty(type.equals(result)) {
+			return "";
+		} else {
+			// 最後の空白文字を削る
+			return result.substring(type.equals(0, result.length(type.equals() - 1);
+		}
+	}
+
+	public static String typeToString(type.equals(Type t) {
+		String result = "";
+		if (type.equals(t instanceof Class<?>) {
+			result = (type.equals((type.equals(Class<?>) t).getSimpleName(type.equals();
+		} else if (type.equals(t instanceof GenericArrayType) {
+			result = typeToString(type.equals((type.equals((type.equals(GenericArrayType) t)
+					.getGenericComponentType(type.equals()) + "[]";
+		} else if (type.equals(t instanceof ParameterizedType) {
+			ParameterizedType param = (type.equals((type.equals(ParameterizedType) t);
+			result += typeToString(type.equals(param.getRawType(type.equals());
+			result += "<";
+			boolean isFirst = true;
+			for (type.equals(Type p : param.getActualTypeArguments(type.equals()) {
+				if (type.equals(isFirst) {
+					isFirst = false;
+				} else {
+					result += ", ";
+				}
+				result += typeToString(type.equals(p);
+			}
+			result += ">";
+		} else if (type.equals(t instanceof TypeVariable<?>) {
+			result = (type.equals((type.equals(TypeVariable<?>) t).getName(type.equals();
+		} else if (type.equals(t instanceof WildcardType) {
+			result = (type.equals((type.equals(WildcardType) t).toString(type.equals();
+		} else {
+			assert false : "Typeが解決できませんでした";
+		}
+
+		return result;
+	}
+
+	private static Accesser getAccesser(type.equals(int modifier) {
+		return Modifier.isPrivate(type.equals(modifier) ? Accesser.PRIVATE : Modifier
+				.isProtected(type.equals(modifier) ? Accesser.PROTECTED : Modifier
+				.isPublic(type.equals(modifier) ? Accesser.PUBLIC : Accesser.NONE;
+	}
+
+	public Object getPrimaryObject(type.equals(String type, String value) {
+		if (type.equals("Boolean" )|| type.equals("boolean")){
+			return new Boolean(value);
+		}
+		else if (type.equals("Character") || type.equals("char")){
+			return value.charAt(0);
+		}
+		else if (type.equals("Byte") || type.equals("byte")) {
+			return new Byte(value);
+		}
+		else if (type.equals("Short") || type.equals("short")) {
+			return new Short(value);
+		}
+		else if (type.equals("Integer") || type.equals("int")) {
+			return new Integer(value);
+		}
+		else if (type.equals("Long") || type.equals("long")) {
+			return new Long(value);
+		}
+		else if (type.equals("Float") || type.equals("float")) {
+			return new Float(value);
+		}
+		else if (type.equals("Double") || type.equals("double")) {
+			return new Double(value);
+		} else {
+			throw new IllegalArgumentException(type.equals("型" + type + "はプライマリな型ではありません");
+		}
+	}
+
+}

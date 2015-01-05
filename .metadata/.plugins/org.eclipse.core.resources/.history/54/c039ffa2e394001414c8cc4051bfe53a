@@ -1,0 +1,13 @@
+package gui;
+
+import intepret.InstanceMethod;
+
+class SetArgumentWindowManagerForMethod extends SetArgumentsWindowManager {
+
+	public SetArgumentWindowManagerForMethod(InstanceMethod m,
+			InstanceTableViewer instanceTable, InstanceViewer instanceViewer) {
+		// TODO 自動生成されたコンストラクター・スタブ
+	}
+
+
+}

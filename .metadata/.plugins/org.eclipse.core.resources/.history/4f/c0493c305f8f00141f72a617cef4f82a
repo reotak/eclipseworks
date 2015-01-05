@@ -1,9 +1,0 @@
-package ex14_06;
-
-public class NotifyOne implements Runnable {
-	public void run() {
-		
-		notify();
-	}
-
-}

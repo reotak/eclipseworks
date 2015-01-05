@@ -1,0 +1,18 @@
+package gui;
+
+import intepret.IConstructor;
+
+class SetArgumentsWindowManagerForConsructor extends SetArgumentsWindowManager{
+	final private IConstructor con;
+	final private InstanceViewer instanceViewer;
+
+	public SetArgumentsWindowManagerForConsructor(IConstructor con, InstanceViewer instanceViewer) {
+		super(con.getArgTypes(), instanceViewer);
+		this.con = con;
+		this.instanceViewer = instanceViewer;
+	}
+
+	public void catchArguments(Object[] args) {
+		instanceViewer.addInstance(con, args);
+	}
+}

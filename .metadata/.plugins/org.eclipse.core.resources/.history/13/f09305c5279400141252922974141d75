@@ -1,0 +1,15 @@
+package gui;
+
+import java.lang.reflect.Type;
+
+class ArgumentsSetWindowManagerForConsructor extends ArgumentsSetWindowManager{
+
+	final private InstanceViewer table;
+
+	public ArgumentsSetWindowManagerForConsructor(Type[] argTypes, InstanceViewer table) {
+		super(argTypes);
+		this.table = table;
+	}
+
+
+}

@@ -1,0 +1,19 @@
+package intepret;
+
+import java.util.List;
+
+public interface IInstance {
+
+	public abstract List<InstanceField> getFields();
+
+	public InstanceField getField(String name);
+
+	public abstract String getInstanceId();
+
+	public abstract String getCls();
+
+	public abstract Object getObject();
+
+	public abstract String toString();
+
+}

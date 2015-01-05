@@ -1,0 +1,35 @@
+package gui;
+
+import java.awt.BorderLayout;
+
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+
+class SetArgumentsWindow extends JFrame {
+	private final java.lang.reflect.Type[] argTypes;
+	private final Object[] args;
+	private final JTable settingArgsTable;
+	private final JTextField targetArgTextField;
+	private final InstanceViewer instanceViewer;
+	private final JTable instanceTable;
+	private final JTextField primaryTextField;
+	private final JComboBox<String> primaryComboBox;
+
+	public SetArgumentsWindow(java.lang.reflect.Type[] argTypes, CatchArguments to) {
+		this.setTitle("引数の設定");
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+		// argsを生成
+		this.args = new Object[args.length];
+
+		// 設定済みの引数を表示するテーブル
+		JPanel settingArgsPanel = new JPanel();
+		settingArgsPanel.add(new JLabel("設定済みの引数"), BorderLayout.NORTH);
+		settingArgsTable = new JTable()
+
+	}
+}

@@ -1,0 +1,107 @@
+package gui;
+
+import intepret.IConstructor;
+import intepret.IInstance;
+import intepret.InstanceCreater;
+import intepret.InstanceField;
+import intepret.InstanceTable;
+
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.lang.reflect.InvocationTargetException;
+import java.util.Dictionary;
+import java.util.Enumeration;
+import java.util.List;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+class ChangeValueDialog extends JFrame {
+	private final InstanceField field;
+	private final InstanceTable table;
+	private final JTable jtable;
+
+	public ChangeValueDialog(InstanceField field, InstanceTable table) {
+		this.field = field;
+		this.table = table;
+
+		setTitle(field.getName());
+
+		JPanel nowValuePannel = new JPanel();
+		nowValuePannel.add(new JLabel("現在の値:" + field.getValue()), BorderLayout.CENTER);
+		nowValuePannel.add(new JLabel("型      :" + field.getType()), BorderLayout.SOUTH);
+		getContentPane().add(nowValuePannel, BorderLayout.NORTH);
+
+		// InstanceTableを表示
+		DefaultTableModel tableModel = createInstanceTabelModel(table.getTable());
+		this.setBounds(10, 10, 500, 800);
+		jtable = new JTable(tableModel);
+		JScrollPane sp = new JScrollPane(jtable);
+		sp.setPreferredSize(new Dimension(450, 450));
+		jtable.doLayout();
+		JPanel tablePanel = new JPanel();
+		tablePanel.add(sp);
+
+		// InstanceTable の反映ボタン
+		JButton changeButton = new JButton("既存のオブジェクトを値に設定");
+		changeButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				trySetObjectSelectedTable();
+			}
+		});
+		tablePanel.add(changeButton);
+		getContentPane().add(tablePanel, BorderLayout.CENTER);
+
+	}
+
+	public DefaultTableModel createInstanceTabelModel(Dictionary<String, IInstance> table) {
+		String[] columnNames = new String[]{ "ID", "型" };
+
+		// モデルを生成する
+		DefaultTableModel model = new DefaultTableModel(columnNames, 0) {
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
+
+		for (Enumeration<String> e = table.keys(); e.hasMoreElements();) {
+			String key = e.nextElement();
+			model.addRow(new String[]{ key, table.get(key).getCls()});
+		}
+		return model;
+	}
+
+	public static void main(String[] args) {
+		InstanceTable t = new InstanceTable();
+		try {
+			List<IConstructor> cons = InstanceCreater
+					.getConstructorList("java.lang.Integer");
+			t.addNewInstance(cons.get(0), new Object[] { new Integer(100) });
+			t.addNewInstance(cons.get(0), new Object[] { new Integer(101) });
+		} catch (ClassNotFoundException | InstantiationException
+				| IllegalAccessException | IllegalArgumentException
+				| InvocationTargetException e) {
+			e.printStackTrace();
+		}
+
+		InstanceField f = t.getTable().get("#0001").getFields().get(0);
+		ChangeValueDialog test = new ChangeValueDialog(f, t);
+
+		test.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		test.setVisible(true);
+
+	}
+
+	private void trySetObjectSelectedTable() {
+		int num = jtable.getSelectedRow();
+		System.out.println(num);
+	}
+
+}

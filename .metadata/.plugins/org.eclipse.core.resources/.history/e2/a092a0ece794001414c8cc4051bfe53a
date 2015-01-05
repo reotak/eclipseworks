@@ -1,0 +1,14 @@
+package gui;
+
+import intepret.InstanceMethod;
+
+class SetArgumentsWindowManagerForMethod extends SetArgumentsWindowManager {
+
+	public SetArgumentsWindowManagerForMethod(InstanceMethod m,
+			InstanceTableViewer instanceTable, InstanceTableViewer instanceTableViewer) {
+		super(m.getArgTypes(), instanceTableViewer);
+
+	}
+
+
+}

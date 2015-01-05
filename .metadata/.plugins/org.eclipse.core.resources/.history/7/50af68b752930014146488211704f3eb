@@ -1,0 +1,43 @@
+package intepret;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Constructor {
+	final private Class<?> cls;
+	final Type[] argTypes;
+	final String name;
+
+	public Constructor(Class<?> cls, Type[] argTypes) {
+		this.cls = cls;
+		this.argTypes = argTypes;
+
+		// このコンストラクタを表す名前を生成
+		String tmp = "";
+		tmp += cls.getSimpleName() + "(" ;
+
+		List<String> types = new ArrayList<String>();
+		for (Type type : argTypes) {
+			types.add(Util.typeToString(type));
+		}
+		tmp += Util.insertString(", ", types) + ")";
+
+		name = tmp;
+	}
+
+	public Class<?> getCls() {
+		return cls;
+	}
+
+	public Type[] getArgTypes() {
+		return argTypes;
+	}
+	public String getName() {
+		return name;
+	}
+
+	public String toString() {
+		return name;
+	}
+}

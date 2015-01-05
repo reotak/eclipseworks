@@ -1,0 +1,24 @@
+package gui;
+
+import java.lang.reflect.Type;
+
+abstract class SetArgumentsWindowManager implements CatchArguments {
+	final private Type[] argTypes;
+	final private InstanceTableViewer instanceViewer;
+	public SetArgumentsWindowManager(Type[] argTypes, InstanceTableViewer instanceViewer) {
+		this.argTypes = argTypes;
+		this.instanceViewer = instanceViewer;
+	}
+
+	abstract public void catchArguments(Object[] args);
+
+	public void start() {
+		if (argTypes == null || argTypes.length == 0) {
+			catchArguments(new Object[0]);
+			return;
+		}
+
+		SetArgumentsWindow window = new SetArgumentsWindow(argTypes, this, instanceViewer);
+		window.setVisible(true);
+	}
+}

@@ -1,0 +1,6 @@
+package gui;
+
+class SetArgumentWindowManagerForMethod extends SetArgumentWindowManager {
+
+
+}
