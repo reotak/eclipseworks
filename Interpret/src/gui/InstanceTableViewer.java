@@ -21,14 +21,14 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-class InstanceTableViewer extends JFrame {
+public class InstanceTableViewer extends JFrame {
 	private final JTable instanceTable;
 	private final DefaultTableModel tableModel;
 	private final Dictionary<String, IInstance> realTable = new Hashtable<String, IInstance>();
 	private int lastId = 0;
 
 	public InstanceTableViewer() {
-		setTitle("インスタンステーブルビューア");
+		setTitle("インスタンステーブル");
 		this.setBounds(10, 10, 500, 800);
 
 		// InstanceTableを表示

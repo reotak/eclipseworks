@@ -1,0 +1,14 @@
+package threadPool;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class TestThreadPool {
+
+	@Test
+	public void test() {
+		fail("まだ実装されていません");
+	}
+
+}

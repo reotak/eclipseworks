@@ -1,5 +1,0 @@
-package ex14_07;
-
-class Babble extends Thread {
-
-}

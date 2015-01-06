@@ -1,0 +1,11 @@
+package ex16_10;
+
+public class NinjaPlayer extends Player {
+
+	@Override
+	public void play(Game game) {
+		// TODO 自動生成されたメソッド・スタブ
+
+	}
+
+}

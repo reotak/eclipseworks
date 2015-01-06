@@ -31,7 +31,6 @@ class SetArgumentsWindow extends JFrame {
 
 	private int setArgCount = 0;
 
-
 	public SetArgumentsWindow(List<String> argTypes, CatchArguments catchArguments, InstanceTableViewer instanceViewer) {
 		// argsを生成
 		this.args = new Object[argTypes.size()];

@@ -2,8 +2,6 @@ package gui;
 
 import intepret.InstanceMethod;
 
-import java.lang.reflect.InvocationTargetException;
-
 import javax.swing.JOptionPane;
 
 class SetArgumentsWindowManagerForMethod extends SetArgumentsWindowManager {
@@ -29,18 +27,14 @@ class SetArgumentsWindowManagerForMethod extends SetArgumentsWindowManager {
 
 			if (method.isVoidMethod()) {
 				JOptionPane.showMessageDialog(instanceViewer, "戻り値voidのメソッドを実行しました");
-			}else if (result != null) {
+			} else if (result != null) {
 				JOptionPane.showMessageDialog(instanceViewer, "実行結果 : " + result.toString());
 			} else {
 				JOptionPane.showMessageDialog(instanceViewer, "戻り値は null でした");
 			}
 			instanceViewer.refresh();
-
-		} catch (IllegalAccessException | IllegalArgumentException
-				| InvocationTargetException e) {
-			e.printStackTrace();
-			JOptionPane.showMessageDialog(instanceViewer, e.toString());
+		} catch (Throwable t) {
+			JOptionPane.showMessageDialog(instanceViewer, "例外が発生しました :" + t.toString());
 		}
 	}
-
 }

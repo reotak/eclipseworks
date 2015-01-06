@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<runner version="1.0.0">
+<category name="カテゴリーなし">
+<launchConfiguration bookmark="false" name="AnnotationReader"/>
+<launchConfiguration bookmark="false" name="Babble"/>
+<launchConfiguration bookmark="false" name="ChangeValueWindow"/>
+<launchConfiguration bookmark="false" name="ClassContents"/>
+<launchConfiguration bookmark="false" name="ClassContents (1)"/>
+<launchConfiguration bookmark="false" name="ClassFormatTest"/>
+<launchConfiguration bookmark="false" name="DeclarationSearcher"/>
+<launchConfiguration bookmark="false" name="FreeFontClock"/>
+<launchConfiguration bookmark="false" name="Friendly"/>
+<launchConfiguration bookmark="false" name="Friendly2"/>
+<launchConfiguration bookmark="false" name="Game"/>
+<launchConfiguration bookmark="false" name="Instance"/>
+<launchConfiguration bookmark="false" name="InstanceCreater"/>
+<launchConfiguration bookmark="false" name="InstanceTable"/>
+<launchConfiguration bookmark="false" name="InstanceTableViewer"/>
+<launchConfiguration bookmark="false" name="InstanceViewer"/>
+<launchConfiguration bookmark="false" name="PrintServer"/>
+<launchConfiguration bookmark="false" name="PrintServerTest"/>
+<launchConfiguration bookmark="false" name="Program"/>
+<launchConfiguration bookmark="false" name="Program (1)"/>
+<launchConfiguration bookmark="false" name="QueueTest"/>
+<launchConfiguration bookmark="false" name="SafetyAdder (2)"/>
+<launchConfiguration bookmark="false" name="SyncIncrementer"/>
+<launchConfiguration bookmark="false" name="SyncIncrementer (1)"/>
+<launchConfiguration bookmark="false" name="SyncIncrementer (2)"/>
+<launchConfiguration bookmark="false" name="SyncIncrementerRunner"/>
+<launchConfiguration bookmark="false" name="SyncIncrementerRunner (1)"/>
+<launchConfiguration bookmark="false" name="TestThreadPool"/>
+<launchConfiguration bookmark="false" name="TheadName"/>
+<launchConfiguration bookmark="false" name="ThreadGroupDisplay"/>
+<launchConfiguration bookmark="false" name="TypeDesc"/>
+<launchConfiguration bookmark="false" name="TypeDesc (1)"/>
+<launchConfiguration bookmark="false" name="UtilTest"/>
+</category>
+</runner>
