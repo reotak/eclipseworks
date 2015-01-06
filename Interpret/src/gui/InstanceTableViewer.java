@@ -61,13 +61,22 @@ class InstanceTableViewer extends JFrame {
 		buttonPanel.add(viewButton);
 
 		// 新しいインスタンスの生成ボタン
-		JButton createInstanceButton = new JButton("新しいインスタンスを生成");
+		JButton createInstanceButton = new JButton("インスタンスを生成");
 		createInstanceButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				openCreateInstanceDialog();
 			}
 		});
 		buttonPanel.add(createInstanceButton);
+
+		// 新しい配列を生成ボタン
+		JButton createArrayButton = new JButton("配列を生成");
+		createArrayButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				openCreateArrayDialog();
+			}
+		});
+		buttonPanel.add(createArrayButton);
 
 		getContentPane().add(buttonPanel, BorderLayout.SOUTH);
 	}
@@ -105,8 +114,13 @@ class InstanceTableViewer extends JFrame {
 	}
 
 	private void openCreateInstanceDialog() {
-		ConstructorWindow dialog = new ConstructorWindow(this);
-		dialog.setVisible(true);
+		ConstructorWindow window = new ConstructorWindow(this);
+		window.setVisible(true);
+	}
+
+	private void openCreateArrayDialog() {
+		CreateArrayWindow window = new CreateArrayWindow(this);
+		window.setVisible(true);
 	}
 
 	public IInstance getInstance(String key) {
@@ -130,6 +144,17 @@ class InstanceTableViewer extends JFrame {
 		}
 	}
 
+	public void addInstance(String cls, int[] size) {
+		try{
+			String id = nextId();
+			addInstance(InstanceCreater.createInstance(id, cls, size));
+			addId();
+		} catch (ClassNotFoundException | RuntimeException e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(this, e.toString());
+		}
+	}
+
 	public JTable getInstanceTable() {
 		// return clone
 		JTable table = new JTable(createInstanceTabelModel()){
@@ -144,16 +169,10 @@ class InstanceTableViewer extends JFrame {
 	}
 
 	private String nextId() {
-		if (lastId >= 999) {
-			throw new RuntimeException("これ以上オブジェクトを生成できません。");
-		}
 		return String.format("#%04d", lastId + 1);
 	}
 
 	private void addId() {
-		if (lastId >= 999) {
-			throw new RuntimeException("これ以上オブジェクトを生成できません。");
-		}
 		lastId++;
 	}
 
@@ -163,5 +182,6 @@ class InstanceTableViewer extends JFrame {
 		viewer.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		viewer.setVisible(true);
 	}
+
 
 }

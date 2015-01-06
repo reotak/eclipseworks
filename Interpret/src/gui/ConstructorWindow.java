@@ -24,11 +24,11 @@ public class ConstructorWindow extends JFrame {
 	private final DefaultTableModel model;
 	private final JTextField inputClass;
 
-	private final InstanceTableViewer instanceViewer;
+	private final InstanceTableViewer instanceTableViewer;
 	final List<IConstructor> cons = null;
 
 	public ConstructorWindow(InstanceTableViewer instanceViewer) {
-		this.instanceViewer  = instanceViewer ;
+		this.instanceTableViewer  = instanceViewer ;
 
 		this.setTitle("実行するコンストラクタの選択");
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -73,16 +73,16 @@ public class ConstructorWindow extends JFrame {
 		tablePanel.add(sp);
 		getContentPane().add(tablePanel, BorderLayout.CENTER);
 
-		JPanel buttonPannel = new JPanel();
+		JPanel buttonPanel = new JPanel();
 		JButton startButton = new JButton("決定");
 		startButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				openArgSettingDialog();
 			}
 		});
-		buttonPannel.add(startButton);
+		buttonPanel.add(startButton);
 
-		getContentPane().add(buttonPannel, BorderLayout.SOUTH);
+		getContentPane().add(buttonPanel, BorderLayout.SOUTH);
 	}
 
 	private void setConstuctorsToTable() {
@@ -108,7 +108,7 @@ public class ConstructorWindow extends JFrame {
 		}
 		IConstructor con = (IConstructor)((DefaultTableModel)table.getModel()).getValueAt(row, 0);
 
-		new SetArgumentsWindowManagerForConsructor(con, instanceViewer);
+		new SetArgumentsWindowManagerForConsructor(con, instanceTableViewer);
 		this.dispose();
 
 	}

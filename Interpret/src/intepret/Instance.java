@@ -1,5 +1,6 @@
 package intepret;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -11,6 +12,7 @@ class Instance implements IInstance {
 	private final String instanceId;
 	private final Class<?> cls;
 	private final Object obj;
+	private final boolean isArray;
 	private List<InstanceField> fields;
 	private List<InstanceMethod> methods;
 
@@ -18,6 +20,7 @@ class Instance implements IInstance {
 		instanceId = ins.instanceId;
 		cls = ins.cls;
 		obj = ins.obj;
+		isArray = ins.isArray;
 		createInstanceFields();
 		createInstanceMethods();
 	}
@@ -26,6 +29,10 @@ class Instance implements IInstance {
 			InstantiationException, IllegalAccessException {
 		this.instanceId = instanceId;
 		this.cls = cls;
+		this.isArray = cls.isArray();
+		if (this.isArray == true) {
+			throw new IllegalArgumentException("配列型はサイズ指定のコンストラクタで呼び出してください");
+		}
 		this.obj = cls.newInstance();
 		createInstanceFields();
 		createInstanceMethods();
@@ -43,7 +50,12 @@ class Instance implements IInstance {
 			IllegalArgumentException, InvocationTargetException {
 		this.instanceId = instanceId;
 		this.cls = cls;
+		this.isArray = cls.isArray();
+		if (this.isArray) {
+			throw new IllegalArgumentException("配列型はサイズ指定のコンストラクタで呼び出してください");
+		}
 
+		con.setAccessible(true);
 		if (args == null || args.length == 0) {
 			this.obj = con.newInstance();
 		} else {
@@ -60,6 +72,10 @@ class Instance implements IInstance {
 			IllegalArgumentException, InvocationTargetException {
 		this.instanceId = instanceId;
 		this.cls = cls;
+		this.isArray = cls.isArray();
+		if (this.isArray) {
+			throw new IllegalArgumentException("配列型はサイズ指定のコンストラクタで呼び出してください");
+		}
 
 		// get constructor
 		Constructor<?> con;
@@ -70,6 +86,7 @@ class Instance implements IInstance {
 		}
 
 		// get object
+		con.setAccessible(true);
 		if (args == null || args.length == 0) {
 			this.obj = con.newInstance();
 		} else {
@@ -79,6 +96,21 @@ class Instance implements IInstance {
 		createInstanceFields();
 		createInstanceMethods();
 	}
+
+	public Instance(String instanceId, Class<?> cls, int[] size) {
+		this.instanceId = instanceId;
+		this.obj = Array.newInstance(cls, size);
+
+		this.cls = this.obj.getClass();
+		this.isArray = this.cls.isArray();
+		if (isArray == false) {
+			throw new IllegalArgumentException("配列型が生成できませんでした");
+		}
+
+		createInstanceFields();
+		createInstanceMethods();
+	}
+
 
 	public List<InstanceField> getFields() {
 		return fields;
@@ -141,12 +173,19 @@ class Instance implements IInstance {
 	private void createInstanceFields() {
 		fields = new ArrayList<InstanceField>();
 
-		for (Field f : cls.getDeclaredFields()) {
+		if (isArray == false) {
+			for (Field f : cls.getDeclaredFields()) {
 
-			try {
-				fields.add(new InstanceField(f, obj));
-			} catch (IllegalArgumentException | IllegalAccessException e) {
-				assert false : "フィールドの設定に失敗しました";
+				try {
+					fields.add(new InstanceField(f, obj));
+				} catch (IllegalArgumentException | IllegalAccessException e) {
+					assert false : "フィールドの設定に失敗しました";
+				}
+			}
+		} else {
+			int len = Array.getLength(obj);
+			for (int i = 0; i < len; i++) {
+				fields.add(new InstanceField(i, obj, cls.getComponentType()));
 			}
 		}
 	}

@@ -1,0 +1,99 @@
+package intepret;
+
+import java.lang.reflect.Array;
+import java.lang.reflect.Field;
+
+public class InstanceField {
+	private final Field f;
+	private final Object target;
+	private final String name;
+	private final String type;
+	private final boolean isArray;
+	private String value;
+
+
+	public InstanceField(Field f, Object target) throws IllegalArgumentException, IllegalAccessException {
+		f.setAccessible(true);
+
+		this.f = f;
+		this.target = target;
+
+		name = f.getName();
+		type = Util.typeToString(f.getGenericType());
+
+		isArray = false;
+
+		Object tmp = f.get(target);
+		if (tmp != null) {
+			value = tmp.toString();
+		} else {
+			value = "NULL";
+		}
+	}
+
+	public InstanceField(int index, Object target, Class<?> fieldType) {
+		f = null;
+		this.target = target;
+		this.name = index + "";
+
+		isArray = true;
+
+		type = Util.typeToString(fieldType);
+
+		Object tmp = Array.get(target, index);
+		if (tmp != null) {
+			value = tmp.toString();
+		} else {
+			value = "NULL";
+		}
+	}
+
+	public final String getName() {
+		return name;
+	}
+
+	public final String getValue() {
+		return value;
+	}
+
+	public final String getType() {
+		return type;
+	}
+
+	public final void reflesh() {
+		Object tmp = null;
+		try {
+			f.setAccessible(true);
+			tmp = f.get(target);
+		} catch (IllegalArgumentException | IllegalAccessException e) {
+			e.printStackTrace();
+			assert false : "値が設定できませんでした";
+		}
+		if (tmp != null) {
+			value = tmp.toString();
+		} else {
+			value = "NULL";
+		}
+	}
+
+	public void setValue(Object value)
+			throws IllegalArgumentException, IllegalAccessException,
+			SecurityException, NoSuchFieldException {
+		if (isArray == false){
+			f.setAccessible(true);
+			f.set(target, value);
+		} else {
+			Array.set(target, new Integer(name), value);
+		}
+
+		if (value != null) {
+			this.value = value.toString();
+		}  else {
+			this.value = "NULL";
+		}
+	}
+
+	public String toString() {
+		return name + " -> " + value;
+	}
+}

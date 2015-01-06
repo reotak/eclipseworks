@@ -1,5 +1,6 @@
 package intepret;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 
 public class InstanceField {
@@ -7,7 +8,8 @@ public class InstanceField {
 	private final Object target;
 	private final String name;
 	private final String type;
-	private String value;
+	private final boolean isArray;
+
 
 	public InstanceField(Field f, Object target) throws IllegalArgumentException, IllegalAccessException {
 		f.setAccessible(true);
@@ -18,12 +20,17 @@ public class InstanceField {
 		name = f.getName();
 		type = Util.typeToString(f.getGenericType());
 
-		Object tmp = f.get(target);
-		if (tmp != null) {
-			value = tmp.toString();
-		} else {
-			value = "NULL";
-		}
+		isArray = false;
+	}
+
+	public InstanceField(int index, Object target, Class<?> fieldType) {
+		f = null;
+		this.target = target;
+		this.name = index + "";
+
+		isArray = true;
+
+		type = Util.typeToString(fieldType);
 	}
 
 	public final String getName() {
@@ -31,42 +38,42 @@ public class InstanceField {
 	}
 
 	public final String getValue() {
-		return value;
+		Object tmp = null;
+		try {
+			if (isArray == false) {
+				f.setAccessible(true);
+				tmp = f.get(target);
+			} else {
+				tmp = Array.get(target, new Integer(name));
+			}
+		} catch (IllegalArgumentException | IllegalAccessException e) {
+			e.printStackTrace();
+			assert false : "値が取得できませんでした";
+		}
+		if (tmp != null) {
+			return tmp.toString();
+		} else {
+			return "NULL";
+		}
+
 	}
 
 	public final String getType() {
 		return type;
 	}
 
-	public final void reflesh() {
-		Object tmp = null;
-		try {
-			f.setAccessible(true);
-			tmp = f.get(target);
-		} catch (IllegalArgumentException | IllegalAccessException e) {
-			e.printStackTrace();
-			assert false : "値が設定できませんでした";
-		}
-		if (tmp != null) {
-			value = tmp.toString();
-		} else {
-			value = "NULL";
-		}
-	}
-
 	public void setValue(Object value)
 			throws IllegalArgumentException, IllegalAccessException,
 			SecurityException, NoSuchFieldException {
-		f.setAccessible(true);
-		f.set(target, value);
-		if (value != null) {
-			this.value = value.toString();
-		}  else {
-			this.value = "NULL";
+		if (isArray == false){
+			f.setAccessible(true);
+			f.set(target, value);
+		} else {
+			Array.set(target, new Integer(name), value);
 		}
 	}
 
 	public String toString() {
-		return name + " -> " + value;
+		return name + " -> " + getValue().toString();
 	}
 }

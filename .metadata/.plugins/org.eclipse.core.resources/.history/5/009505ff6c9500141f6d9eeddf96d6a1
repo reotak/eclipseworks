@@ -1,0 +1,11 @@
+package gui;
+
+import javax.swing.JFrame;
+
+public class CreateArrayWindow extends JFrame {
+
+	public CreateArrayWindow(InstanceTableViewer instanceTableViewer) {
+
+	}
+
+}

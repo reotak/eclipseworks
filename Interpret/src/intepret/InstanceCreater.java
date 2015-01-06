@@ -22,4 +22,10 @@ public class InstanceCreater {
 	public static IInstance createInstance(String instanceId, intepret.IConstructor con, Object[] args) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		return new Instance(instanceId, con, args);
 	}
+
+	public static IInstance createInstance(String instanceId, String cls, int[] size) throws ClassNotFoundException {
+		Class<?> c = Class.forName(cls);
+
+		return new Instance(instanceId, c, size);
+	}
 }

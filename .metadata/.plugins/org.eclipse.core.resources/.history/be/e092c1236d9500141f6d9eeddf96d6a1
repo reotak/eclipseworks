@@ -1,0 +1,28 @@
+package gui;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+
+public class CreateArrayWindow extends JFrame {
+	private final JTable table;
+	private final DefaultTableModel model;
+	private final JTextField inputClass;
+
+	private final InstanceTableViewer instanceViewer;
+
+	public CreateArrayWindow(InstanceTableViewer instanceTableViewer) {
+		this.instanceViewer = instanceTableViewer
+		JPanel classPanel = new JPanel();
+		classPanel.add(new JLabel("生成するクラス："));
+
+		inputClass = new JTextField();
+		inputClass.setColumns(15);
+		classPanel.add(inputClass);
+
+	}
+
+}

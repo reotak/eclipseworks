@@ -3,8 +3,10 @@ package gui;
 import intepret.InstanceField;
 import intepret.InstanceMethod;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -12,7 +14,6 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -33,10 +34,18 @@ public class InstanceViewer extends JFrame {
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setBounds(10, 10, 500, 800);
 
-		// フィールドを表示するための設定
-		JPanel fieldPanel = new JPanel();
+		GridBagLayout layout =new GridBagLayout();
+		GridBagConstraints c = new GridBagConstraints();
+		c.insets = new Insets(5, 5, 5, 5);
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.CENTER;
+		c.fill = GridBagConstraints.BOTH;
+		c.gridwidth = 510;
 
-		// モデルを生成する
+		this.setLayout(layout);
+
+
+		// フィールドを表示するための設定
 		String[] fieldColumnNames = { "フィールド名", "値" };
 		fieldModel = new DefaultTableModel(fieldColumnNames, 0) {
 			public boolean isCellEditable(int row, int column) {
@@ -55,8 +64,11 @@ public class InstanceViewer extends JFrame {
 		fieldTable.setAutoCreateRowSorter(true);
 		JScrollPane sp1 = new JScrollPane(fieldTable);
 		sp1.setPreferredSize(new Dimension(450, 300));
+		sp1.setMinimumSize(new Dimension(450, 300));
 		fieldTable.doLayout();
-		fieldPanel.add(sp1, BorderLayout.CENTER);
+		layout.setConstraints(sp1, c);
+		this.add(sp1);
+		c.gridy++;
 
 		JButton changeButton = new JButton("値の変更");
 		changeButton.addActionListener(new ActionListener() {
@@ -64,14 +76,12 @@ public class InstanceViewer extends JFrame {
 				openChangeValueDialog();
 			}
 		});
-		fieldPanel.add(changeButton, BorderLayout.SOUTH);
-		getContentPane().add(fieldPanel, BorderLayout.NORTH);
+		layout.setConstraints(changeButton, c);
+		this.add(changeButton);
+		c.gridy++;
 
-		// フィールドを表示するための設定
-		JPanel methodPanel = new JPanel();
-
-		// モデルを生成する
-		String[] methodColumnNames = { "戻り値", "フィールド名", "引数" };
+		// メソッドを表示するための設定
+		String[] methodColumnNames = { "戻り値", "メソッド名", "引数" };
 		methodModel = new DefaultTableModel(methodColumnNames, 0) {
 			public boolean isCellEditable(int row, int column) {
 				return false;
@@ -90,8 +100,12 @@ public class InstanceViewer extends JFrame {
 
 		JScrollPane sp2 = new JScrollPane(methodTable);
 		sp2.setPreferredSize(new Dimension(450, 300));
+		sp2.setMinimumSize(new Dimension(450, 300));
 		methodTable.doLayout();
-		methodPanel.add(sp2, BorderLayout.CENTER);
+
+		layout.setConstraints(sp2, c);
+		this.add(sp2);
+		c.gridy++;
 
 		JButton callButton = new JButton("このメソッドの呼び出し");
 		callButton.addActionListener(new ActionListener() {
@@ -99,19 +113,24 @@ public class InstanceViewer extends JFrame {
 				openCallMethodDialog();
 			}
 		});
-		methodPanel.add(callButton, BorderLayout.SOUTH);
-		getContentPane().add(methodPanel, BorderLayout.CENTER);
+
+		layout.setConstraints(callButton, c);
+		this.add(callButton);
+		c.gridy++;
+
 
 		// 更新ボタン
-		JPanel buttonPannel = new JPanel();
 		JButton renewButton = new JButton("最新の情報に更新");
 		renewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				refresh();
 			}
 		});
-		buttonPannel.add(renewButton, BorderLayout.CENTER);
-		getContentPane().add(buttonPannel, BorderLayout.SOUTH);
+
+		layout.setConstraints(renewButton, c);
+		this.add(renewButton);
+		c.gridy++;
+
 	}
 
 	public void refresh() {
@@ -119,13 +138,21 @@ public class InstanceViewer extends JFrame {
 		int row = fieldModel.getRowCount();
 		// clear tables
 		for (int i = 0; i < row; i++) {
-			fieldModel.removeRow(0);
+			try {
+				fieldModel.removeRow(0);
+			} catch (IndexOutOfBoundsException e) {
+				// ソータが例外を送ることがあるが無視をする
+			}
 		}
 		addFieldTableFromFields();
 
 		row = methodModel.getRowCount();
 		for (int i = 0; i < row; i++) {
-			methodModel.removeRow(0);
+			try {
+				methodModel.removeRow(0);
+			} catch (IndexOutOfBoundsException e) {
+				// ソータが例外を送ることがあるが無視をする
+			}
 		}
 		addMethodTableFromMethods();
 	}
@@ -133,7 +160,6 @@ public class InstanceViewer extends JFrame {
 	private void addFieldTableFromFields() {
 		List<InstanceField> fields = this.ins.getFields();
 		for (int i = 0; i < fields.size(); i++) {
-			fields.get(i).reflesh();
 			fieldModel.addRow(new String[] { fields.get(i).getName(),
 					fields.get(i).getValue() });
 		}
