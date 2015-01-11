@@ -1,0 +1,8 @@
+package ex17_02;
+
+class DataHandler {
+	private File lastFile;
+	private WeekReference<byte[]> lastData;
+
+
+}

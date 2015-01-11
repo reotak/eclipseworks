@@ -25,8 +25,9 @@ class Instance implements IInstance {
 		createInstanceMethods();
 	}
 
-	public Instance(String instanceId, Class<?> cls) throws ClassNotFoundException,
-			InstantiationException, IllegalAccessException {
+	public Instance(String instanceId, Class<?> cls)
+			throws ClassNotFoundException, InstantiationException,
+			IllegalAccessException {
 		this.instanceId = instanceId;
 		this.cls = cls;
 		this.isArray = cls.isArray();
@@ -38,16 +39,13 @@ class Instance implements IInstance {
 		createInstanceMethods();
 	}
 
-
 	public Instance(String instanceId, IConstructor con, Object[] objects)
-			throws InstantiationException, IllegalAccessException,
-			IllegalArgumentException, InvocationTargetException {
+			throws Throwable {
 		this(instanceId, con.getCls(), con.getReflectConstructor(), objects);
 	}
 
-	private Instance(String instanceId, Class<?> cls, Constructor<?> con, Object[] args)
-			throws InstantiationException, IllegalAccessException,
-			IllegalArgumentException, InvocationTargetException {
+	private Instance(String instanceId, Class<?> cls, Constructor<?> con,
+			Object[] args) throws Throwable {
 		this.instanceId = instanceId;
 		this.cls = cls;
 		this.isArray = cls.isArray();
@@ -56,20 +54,22 @@ class Instance implements IInstance {
 		}
 
 		con.setAccessible(true);
+		try {
 		if (args == null || args.length == 0) {
 			this.obj = con.newInstance();
 		} else {
 			this.obj = con.newInstance(args);
+		}
+		} catch (InvocationTargetException e) {
+			throw e.getCause();
 		}
 
 		createInstanceFields();
 		createInstanceMethods();
 	}
 
-	public Instance(String instanceId, Class<?> cls, Class<?>[] argClss, Object[] args)
-			throws NoSuchMethodException, SecurityException,
-			InstantiationException, IllegalAccessException,
-			IllegalArgumentException, InvocationTargetException {
+	public Instance(String instanceId, Class<?> cls, Class<?>[] argClss,
+			Object[] args) throws Throwable {
 		this.instanceId = instanceId;
 		this.cls = cls;
 		this.isArray = cls.isArray();
@@ -87,10 +87,14 @@ class Instance implements IInstance {
 
 		// get object
 		con.setAccessible(true);
-		if (args == null || args.length == 0) {
-			this.obj = con.newInstance();
-		} else {
-			this.obj = con.newInstance(args);
+		try {
+			if (args == null || args.length == 0) {
+				this.obj = con.newInstance();
+			} else {
+				this.obj = con.newInstance(args);
+			}
+		} catch (InvocationTargetException e) {
+			throw e.getCause();
 		}
 
 		createInstanceFields();
@@ -110,7 +114,6 @@ class Instance implements IInstance {
 		createInstanceFields();
 		createInstanceMethods();
 	}
-
 
 	public List<InstanceField> getFields() {
 		return fields;
@@ -150,7 +153,8 @@ class Instance implements IInstance {
 		}
 
 		for (InstanceMethod method : methods) {
-			if (method.getName().equals(name) && method.isEqualArgTypes(argTypesAsString)) {
+			if (method.getName().equals(name)
+					&& method.isEqualArgTypes(argTypesAsString)) {
 				return method;
 			}
 		}

@@ -53,9 +53,14 @@ public class InstanceMethod {
 		return argTypesAsString.equals(tmp);
 	}
 
-	public Object invoke(Object[] values) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+	public Object invoke(Object[] values) throws Throwable {
 		m.setAccessible(true);
-		return m.invoke(target, values);
+
+		try {
+			return m.invoke(target, values);
+		} catch (InvocationTargetException e) {
+			throw e.getCause();
+		}
 	}
 
 	public boolean isVoidMethod() {

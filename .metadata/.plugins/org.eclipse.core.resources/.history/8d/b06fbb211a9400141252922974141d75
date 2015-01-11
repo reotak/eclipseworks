@@ -1,7 +1,0 @@
-package gui;
-
-public class CreateInstanceDialog {
-	public CreateInstanceDialog(InstanceViewer table, List<IConstructor> cons) {
-
-	}
-}

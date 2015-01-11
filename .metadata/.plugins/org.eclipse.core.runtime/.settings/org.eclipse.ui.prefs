@@ -1,5 +1,5 @@
 ENABLE_ANIMATIONS=false
-KEY_CONFIGURATION_ID=org.eclipse.ui.emacsAcceleratorConfiguration
+KEY_CONFIGURATION_ID=com.mulgasoft.emacsplusConfiguration
 SHOW_MEMORY_MONITOR=true
 eclipse.preferences.version=1
 showIntro=false

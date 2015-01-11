@@ -1,7 +1,6 @@
 package intepret;
 
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +18,7 @@ public class InstanceCreater {
 		return cs;
 	}
 
-	public static IInstance createInstance(String instanceId, intepret.IConstructor con, Object[] args) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+	public static IInstance createInstance(String instanceId, intepret.IConstructor con, Object[] args) throws Throwable {
 		return new Instance(instanceId, con, args);
 	}
 

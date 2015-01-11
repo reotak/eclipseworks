@@ -8,7 +8,6 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.lang.reflect.InvocationTargetException;
 import java.util.Dictionary;
 import java.util.Enumeration;
 import java.util.Hashtable;
@@ -137,8 +136,7 @@ public class InstanceTableViewer extends JFrame {
 			String id = nextId();
 			addInstance(InstanceCreater.createInstance(id, con, args));
 			addId();
-		} catch (InstantiationException | IllegalAccessException
-				| InvocationTargetException | RuntimeException e) {
+		} catch (Throwable e) {
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(this, e.toString());
 		}
