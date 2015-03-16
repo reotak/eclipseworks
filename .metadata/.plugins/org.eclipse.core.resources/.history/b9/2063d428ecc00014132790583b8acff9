@@ -1,0 +1,25 @@
+package ex22_06;
+
+import java.util.Random;
+
+public class GaussianTest {
+	private static double[] result = new double[10000];
+
+	public static void main(String[] args) {
+		Random r = new Random();
+
+		for (int i = 0; i < result.length; i++) {
+			result[i] = r.nextGaussian();
+		}
+
+		// get min and max value
+		double max = Double.MIN_VALUE;
+		double min = Double.MAX_VALUE;
+		for (int i = 0; i < result.length; i++) {
+			max = Math.max(result[i], max);
+			min = Math.min(result[i], min);
+		}
+
+		//
+	}
+}

@@ -1,0 +1,49 @@
+package ex22_03;
+
+import java.util.BitSet;
+import java.util.HashMap;
+
+public class WhichChars {
+	private HashMap<Byte, BitSet> used = new HashMap<Byte, BitSet>();
+
+	public WhichChars(String str) {
+		byte high = 0; // 上位8ビット
+		boolean isHigh = true;
+		for (Byte b : str.getBytes()) {
+			if (isHigh) {
+				high = b;
+				isHigh = false;
+			} else {
+				BitSet low; // 下位 8 ビット
+				if (used.containsKey(high)) {
+					low = used.get(high);
+				} else {
+					low = new BitSet(256);
+				}
+				low.set(b);
+				used.put(high, low);
+				isHigh = true;
+			}
+		}
+	}
+
+	public String toString() {
+		String desc = "[";
+		 for(Byte high : used.keySet()) {
+			BitSet lows = used.get(high);
+			for (int i = lows.nextSetBit(0); i >= 0; i = lows.nextSetBit(i+1) ){
+				desc += (char) ((char)(high << 8) + i);
+			}
+		 }
+
+		return desc + "]";
+	}
+
+	public static void main(String[] args) {
+		String target = "\uD800あいうえおHello, World.";
+		WhichChars wc = new WhichChars(target);
+
+		System.out.println("target : " + target);
+		System.out.println("result : " + wc.toString());
+	}
+}

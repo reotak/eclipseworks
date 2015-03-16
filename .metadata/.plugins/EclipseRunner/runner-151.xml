@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<runner version="1.0.0">
+<category name="カテゴリーなし">
+<launchConfiguration bookmark="false" name="AnnotationReader"/>
+<launchConfiguration bookmark="false" name="ArrayBunchListTest"/>
+<launchConfiguration bookmark="false" name="Attr"/>
+<launchConfiguration bookmark="false" name="AttributeReader"/>
+<launchConfiguration bookmark="false" name="AttributeReaderTest"/>
+<launchConfiguration bookmark="false" name="AttributeReaderTest (1)"/>
+<launchConfiguration bookmark="false" name="Babble"/>
+<launchConfiguration bookmark="false" name="CSVReaderTest"/>
+<launchConfiguration bookmark="false" name="CSVReaderTest (1)"/>
+<launchConfiguration bookmark="false" name="CSVReaderTest (2)"/>
+<launchConfiguration bookmark="false" name="CSVReaderTest.getSampleCSV"/>
+<launchConfiguration bookmark="false" name="CSVReaderTest.longCellsError"/>
+<launchConfiguration bookmark="false" name="CalculatorTest"/>
+<launchConfiguration bookmark="false" name="ChangeValueWindow"/>
+<launchConfiguration bookmark="false" name="CheckMemory"/>
+<launchConfiguration bookmark="false" name="ClassContents"/>
+<launchConfiguration bookmark="false" name="ClassContents (1)"/>
+<launchConfiguration bookmark="false" name="ClassFormatTest"/>
+<launchConfiguration bookmark="false" name="DataHandler"/>
+<launchConfiguration bookmark="false" name="DataHandler (1)"/>
+<launchConfiguration bookmark="false" name="DeclarationSearcher"/>
+<launchConfiguration bookmark="false" name="DecryptInputStream"/>
+<launchConfiguration bookmark="false" name="DirExtensionFilter"/>
+<launchConfiguration bookmark="false" name="DoubleListReader"/>
+<launchConfiguration bookmark="false" name="DoubleListReaderTest"/>
+<launchConfiguration bookmark="false" name="DoubleListViewer"/>
+<launchConfiguration bookmark="false" name="EncryptOutputStream"/>
+<launchConfiguration bookmark="false" name="FileInfomation"/>
+<launchConfiguration bookmark="false" name="FindWord"/>
+<launchConfiguration bookmark="false" name="FreeFontClock"/>
+<launchConfiguration bookmark="false" name="Clock (1)"/>
+<launchConfiguration bookmark="false" name="Friendly"/>
+<launchConfiguration bookmark="false" name="Friendly2"/>
+<launchConfiguration bookmark="false" name="Game"/>
+<launchConfiguration bookmark="false" name="GaussianTest"/>
+<launchConfiguration bookmark="false" name="Instance"/>
+<launchConfiguration bookmark="false" name="InstanceCreater"/>
+<launchConfiguration bookmark="false" name="InstanceTable"/>
+<launchConfiguration bookmark="false" name="InstanceTableViewer"/>
+<launchConfiguration bookmark="false" name="InstanceViewer"/>
+<launchConfiguration bookmark="false" name="NameOpValueParser"/>
+<launchConfiguration bookmark="false" name="PrintServer"/>
+<launchConfiguration bookmark="false" name="PrintServerTest"/>
+<launchConfiguration bookmark="false" name="Program"/>
+<launchConfiguration bookmark="false" name="Program (1)"/>
+<launchConfiguration bookmark="false" name="QueueTest"/>
+<launchConfiguration bookmark="false" name="RandomTest"/>
+<launchConfiguration bookmark="false" name="ResourceManager"/>
+<launchConfiguration bookmark="false" name="ResourceManager (1)"/>
+<launchConfiguration bookmark="false" name="SafetyAdder (2)"/>
+<launchConfiguration bookmark="false" name="ShortStringsTest"/>
+<launchConfiguration bookmark="false" name="SortListReader"/>
+<launchConfiguration bookmark="false" name="SortListReaderTest"/>
+<launchConfiguration bookmark="false" name="SortListReaderTest.notFoundFileTest"/>
+<launchConfiguration bookmark="false" name="StackTest"/>
+<launchConfiguration bookmark="false" name="StackTest.popTest"/>
+<launchConfiguration bookmark="false" name="SyncIncrementer"/>
+<launchConfiguration bookmark="false" name="SyncIncrementer (1)"/>
+<launchConfiguration bookmark="false" name="SyncIncrementer (2)"/>
+<launchConfiguration bookmark="false" name="SyncIncrementerRunner"/>
+<launchConfiguration bookmark="false" name="SyncIncrementerRunner (1)"/>
+<launchConfiguration bookmark="false" name="TestThreadPool"/>
+<launchConfiguration bookmark="false" name="TheadName"/>
+<launchConfiguration bookmark="false" name="ThreadGroupDisplay"/>
+<launchConfiguration bookmark="false" name="TranslateByte"/>
+<launchConfiguration bookmark="false" name="TranslateByte (1)"/>
+<launchConfiguration bookmark="false" name="TranslateByte2"/>
+<launchConfiguration bookmark="false" name="TranslateByte3"/>
+<launchConfiguration bookmark="false" name="TranslateByte4"/>
+<launchConfiguration bookmark="false" name="TranslateByte5"/>
+<launchConfiguration bookmark="false" name="TypeDesc"/>
+<launchConfiguration bookmark="false" name="TypeDesc (1)"/>
+<launchConfiguration bookmark="false" name="UtilTest"/>
+<launchConfiguration bookmark="false" name="WhichChars"/>
+<launchConfiguration bookmark="false" name="WhichChars (1)"/>
+<launchConfiguration bookmark="false" name="WordCounter"/>
+</category>
+</runner>

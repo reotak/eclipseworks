@@ -1,0 +1,32 @@
+package ex21_06;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Enumeration;
+import java.util.ListIterator;
+
+public class Concat implements Enumeration {
+
+	@Override
+	public boolean hasMoreElements() {
+		// TODO 自動生成されたメソッド・スタブ
+		return false;
+	}
+
+	@Override
+	public Object nextElement() {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
+	}
+
+	public static void main(String[] args) throws IOException {
+		InputStream in;
+		if (args.length == 0) {
+			in = System.in;
+		} else {
+			InputStream fileIn, bufIn;
+			List<InputStream> inputs = new ArrayList<InputStream>(args.length);
+
+
+	}
+}

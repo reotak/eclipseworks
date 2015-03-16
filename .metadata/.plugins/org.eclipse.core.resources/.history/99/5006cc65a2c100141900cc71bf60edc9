@@ -1,0 +1,72 @@
+package ex22_11;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
+
+public class CSVReader {
+
+	public static List<String[]> readCSVTable(BufferedReader source, int cellSize) throws IOException {
+		List<String[]> list = new ArrayList<String[]>();
+
+		while (source.ready()) {
+			StringTokenizer st = new StringTokenizer(source.readLine(), ",");
+			String[] datas = new String[cellSize];
+
+			for (int i = 0; st.hasMoreTokens(); i++) {
+				datas[i] = st.nextToken();
+			}
+			list.add(datas);
+		}
+
+		/*
+		StreamTokenizer in = new StreamTokenizer(source);
+		in.ordinaryChar(',');
+		in.ordinaryChar('\n');
+		in.wordChars('0', '9');
+		in.wordChars('.', '.');
+
+
+		List<String[]> result = new ArrayList<String[]>();
+		String[] inputs = new String[cellSize];
+		int cellNo = 0;
+		while (in.nextToken() != StreamTokenizer.TT_EOF) {
+			if (in.ttype == '\n') {
+				result.add(inputs);
+				cellNo = 0;
+				inputs = new String[cellSize];
+				continue;
+			}
+
+			if (cellNo >= cellSize) {
+				throw new IOException("セルの長すぎる行があります");
+			}
+
+			if (in.ttype == ',') {
+				cellNo++;
+				continue;
+			}
+
+			if (in.ttype == StreamTokenizer.TT_WORD) {
+				if (inputs[cellNo] == null) {
+					inputs[cellNo] = in.sval;
+				} else {
+					inputs[cellNo] += in.sval;
+				}
+			} else if (in.ttype == StreamTokenizer.TT_NUMBER){
+				if (inputs[cellNo] == null) {
+					inputs[cellNo] = String.valueOf(in.nval);
+				} else {
+					inputs[cellNo] += String.valueOf(in.nval);
+				}
+			} else {
+				System.out.println(in);
+			}
+		}
+
+		return result;
+*/
+	}
+}

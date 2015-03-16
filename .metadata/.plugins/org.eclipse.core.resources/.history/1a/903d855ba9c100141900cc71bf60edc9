@@ -1,0 +1,32 @@
+package ex22_12;
+
+import java.io.ByteArrayInputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.util.Scanner;
+import java.util.regex.Pattern;
+
+public class AttributeReader {
+	public static Attributed readAttr(Reader source) {
+		Scanner in = new Scanner(source);
+		String numAttrExpr = "(.*)=(\\d+[\\.\\d+|])";
+		Pattern numAttrPat = Pattern.compile(numAttrExpr, Pattern.MULTILINE);
+
+		while (in.hasNextLine()) {
+			String line = in.findInLine(numAttrPat);
+			if (line == null) {
+				in.nextLine();
+				continue;
+			} else {
+				System.out.println(line);
+				in.nextLine();
+			}
+
+		}
+		return null;
+	}
+
+	public static void main(String[] args) {
+		AttributeReader.readAttr(new InputStreamReader(new ByteArrayInputStream("test=1".getBytes())));
+	}
+}

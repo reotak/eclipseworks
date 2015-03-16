@@ -1,0 +1,61 @@
+package ex22_15;
+
+import java.util.StringTokenizer;
+
+public class Calculator {
+
+	public static double calc(String expr) {
+		StringTokenizer st = new StringTokenizer(expr, " ");
+
+		double total = 0.0;
+		while (st.hasMoreTokens()) {
+			try {
+				total += new Double(st.nextToken());
+			} catch (NumberFormatException e) {
+				throw new IllegalArgumentException("空白で区切られた浮動小数点ではありません" + e.toString());
+			}
+		}
+
+		return total;
+	}
+
+	private static void calcToken(Stack<Double> stack, String token) {
+		if (token == "+") {
+			stack.push(stack.pop() + stack.pop());
+		} else 	if (token == "-") {
+			stack.push(stack.pop() - stack.pop());
+		} else 	if (token == "*") {
+			stack.push(stack.pop() * stack.pop());
+		} else 	if (token == "/") {
+			stack.push(stack.pop() / stack.pop());
+		} else if (token == "sin") {
+			stack.push(Math.sin(stack.pop()));
+		} else if (token == "cos") {
+			stack.push(Math.cos(stack.pop()));
+		} else if (token == "tan") {
+			stack.push(Math.tan(stack.pop()));
+		} else if (token == "asin") {
+			stack.push(Math.asin(stack.pop()));
+		} else if (token == "acos") {
+			stack.push(Math.acos(stack.pop()));
+		} else if (token == "atan") {
+			stack.push(Math.atan(stack.pop()));
+		} else if (token == "atan2") {
+			stack.push(Math.atan2(stack.pop(), stack.pop()));
+		} else if (token == "toRadians") {
+			stack.push(Math.toRadians(stack.pop()));
+		} else if (token == "toDegrees") {
+			stack.push(Math.toDegrees(stack.pop()));
+		} else if (token == "exp") {
+			stack.push(Math.exp(stack.pop()));
+		} else if (token == "sinh") {
+			stack.push(Math.sinh(stack.pop()));
+		} else if (token == "cosh") {
+			stack.push(Math.cosh(stack.pop()));
+		} else if (token == "tanh") {
+			stack.push(Math.tanh(stack.pop()));
+		} else if (token == "pow") {
+			stack.push(Math.pow(stack.pop(), stack.pop()));
+		}
+	}
+}

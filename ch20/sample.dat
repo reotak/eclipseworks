@@ -1,0 +1,6 @@
+name1 = 110
+name2 = 222.223
+name3 = 0.333
+name1 + 1
+name2 - 0.001
+name3 = 3

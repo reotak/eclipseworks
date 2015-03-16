@@ -1,0 +1,27 @@
+package ex21_05;
+
+import static org.junit.Assert.*;
+
+import java.util.Iterator;
+
+import org.junit.Test;
+
+public class ArrayBunchListTest {
+
+	@Test
+	public void test() {
+		Integer[][] arrays = new Integer[][] {
+				{1, 2, 3 },
+				{},
+				{4, 5, 6},
+				{7},
+				{8, 9, 10}};
+		ArrayBunchList list = new ArrayBunchList<Integer>(arrays);
+
+		assertEquals(10, list.size());
+		for (int i = 0; i < 10; i++) {
+			assertEquals(i + 1, list.get(i));
+		}
+	}
+
+}

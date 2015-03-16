@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="メソッド名 &apos;ex20_03.DecryptInputStream.unsignedByteToInt(...)&apos; を &apos;byteToIntAsUnsigned&apos; に変更します&#x0D;&#x0A;- 元のプロジェクト: &apos;ch20&apos;&#x0D;&#x0A;- オリジナル要素: &apos;ex20_03.DecryptInputStream.unsignedByteToInt(...)&apos;&#x0D;&#x0A;- 名前変更済み要素: &apos;ex20_03.DecryptInputStream.byteToIntAsUnsigned(...)&apos;&#x0D;&#x0A;- リファクタリングされた要素の参照を更新" delegate="false" deprecate="false" description="メソッド名 &apos;unsignedByteToInt&apos; を変更します" flags="589826" id="org.eclipse.jdt.ui.rename.method" input="/&lt;ex20_03{DecryptInputStream.java[DecryptInputStream~unsignedByteToInt~B" name="byteToIntAsUnsigned" references="true" stamp="1422719556908" version="1.0"/>
+</session>

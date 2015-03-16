@@ -1,0 +1,4 @@
+Iteratorを実装した、ShortStringsを拡張すべきではない。
+なぜならば、
+  - hasPreviousを実装する際に、nextShortが設定されているかを知りたいが、それを取得できない。
+  - previousを呼び出した際に、nextShortの値はnullになるべきだが、nextShortの値を変更できない

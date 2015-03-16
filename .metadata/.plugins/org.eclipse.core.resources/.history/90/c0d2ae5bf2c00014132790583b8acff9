@@ -1,0 +1,14 @@
+package ex22_07;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class CSVReaderTest {
+
+	@Test
+	public void test() {
+		fail("まだ実装されていません");
+	}
+
+}

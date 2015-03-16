@@ -1,5 +1,0 @@
-package ex16_10;
-
-public class PlayerLoader extends ClassLoader {
-
-}

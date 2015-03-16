@@ -1,9 +1,0 @@
-package gui;
-
-abstract class ArgumentsSetWindowManager implements CatchArguments {
-	public ArgumentsSetWindowManager(Type[] argTypes) {
-		new ArgumentSetWindow(Type[] argTypes, this);
-	}
-
-	abstract void catchArguments(Object[] args);
-}

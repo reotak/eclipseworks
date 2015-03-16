@@ -1,0 +1,31 @@
+package ex22_01;
+
+import javax.lang.model.type.PrimitiveType;
+
+public class DoubleListViewer {
+	private final double[] list;
+	private final int column;
+	private final int length;
+
+	private final int WIDTH = 80;
+
+	public DoubleListViewer(double[] list, int column) {
+		if (list == null) {
+			throw new IllegalArgumentException("list is null");
+		}
+
+		if (column <= 0) {
+			throw new IllegalArgumentException("column <= 0");
+		}
+
+		this.list = list;
+		this.column = column;
+
+		// 一列39文字だとすると、39 + 1（区切り文字） + 39で合計79文字
+		length = (int)((WIDTH + 1) / column) - 1;
+	}
+
+	public String toString() {
+
+	}
+}

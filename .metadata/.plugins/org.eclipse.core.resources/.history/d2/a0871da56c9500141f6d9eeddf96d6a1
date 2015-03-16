@@ -1,9 +1,0 @@
-package gui;
-
-public class CreateArrayWindow extends JFrame {
-
-	public CreateArrayWindow(InstanceTableViewer instanceTableViewer) {
-
-	}
-
-}

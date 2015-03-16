@@ -1,0 +1,23 @@
+package ex21_07;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class StackTest {
+
+	@Test
+	public void test() {
+		Stack<String> stack = new Stack<String>(10);
+
+		stack.push("one");
+		stack.push("two");
+		stack.push("three");
+
+		assertEquals("three", stack.peek());
+		assertEquals("three", stack.pop());
+		assertEquals("two", stack.pop());
+		assertEquals("one", stack.pop());
+		assertEquals(null, stack.pop());
+
+}

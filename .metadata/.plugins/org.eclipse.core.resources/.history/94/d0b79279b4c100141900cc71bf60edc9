@@ -1,0 +1,14 @@
+package ex22_15;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class CalculatorTest {
+
+	@Test
+	public void test() {
+		System.out.println(Calculator.calc("1 2 + 3"));
+	}
+
+}

@@ -1,0 +1,40 @@
+// 未実装
+
+package ex21_06;
+
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.List;
+
+public class Concat implements Enumeration {
+	public static void main(String[] args) throws IOException {
+		Enumeration<InputStream> in;
+		if (args.length == 0) {
+			List<InputStream> fileIn = new ArrayList<InputStream>();
+			fileIn.add(System.in);
+			in = Collections.enumeration(fileIn);
+		} else {
+			InputStream fileIn, bufIn;
+			List<InputStream> inputs = new ArrayList<InputStream>(args.length);
+			for (String arg : args) {
+				fileIn = new FileInputStream(arg);
+				bufIn = new BufferedInputStream(fileIn);
+				inputs.add(bufIn);
+			}
+			in = Collections.enumeration(inputs);
+		}
+		int ch;
+		for (InputStream is : Collections.list(in)) {
+			while ((ch = is.read()) != -1) {
+				System.out.write(ch);
+			}
+		}
+	}
+
+
+}

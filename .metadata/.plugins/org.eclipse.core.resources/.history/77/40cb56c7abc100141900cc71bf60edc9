@@ -1,0 +1,14 @@
+package ex22_12;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class AttributeReaderTest {
+
+	@Test
+	public void test() {
+		fail("まだ実装されていません");
+	}
+
+}

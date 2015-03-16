@@ -1,0 +1,30 @@
+package ex21_05;
+
+import java.util.AbstractList;
+
+public class ArrayBunchList<E> extends AbstractList<E> {
+	private final E[][] arrays;
+	private final int size;
+
+	public ArrayBunchList(E[][] arrays) {
+		this.arrays = arrays.clone();
+		int s = 0;
+		for (E[] array : arrays) {
+			s += array.length;
+		}
+		size = s;
+	}
+
+	@Override
+	public E get(int index) {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
+	}
+
+	@Override
+	public int size() {
+		// TODO 自動生成されたメソッド・スタブ
+		return 0;
+	}
+
+}

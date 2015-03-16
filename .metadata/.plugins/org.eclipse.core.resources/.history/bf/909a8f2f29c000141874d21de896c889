@@ -1,0 +1,7 @@
+package ex21_06;
+
+import java.util.Enumeration;
+
+public class Concat implements Enumeration {
+
+}

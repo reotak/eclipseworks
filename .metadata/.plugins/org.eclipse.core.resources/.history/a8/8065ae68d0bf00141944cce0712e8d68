@@ -1,0 +1,99 @@
+package ex21_04;
+
+import static org.junit.Assert.*;
+
+import java.util.LinkedList;
+import java.util.ListIterator;
+
+import org.junit.Test;
+
+public class ShortStringsTest {
+
+	private ListIterator getSampleIterator() {
+		LinkedList<String> list = new LinkedList<String>();
+		list.add("Hello, World");
+		list.add("one");
+		list.add("two");
+		list.add("three");
+		list.add("LongString");
+		list.add("four");
+		list.add("five");
+		list.add("Goodbye, World");
+
+		return list.listIterator();
+	}
+
+	@Test
+	public void alternatingHasNextAndHasPreviousTest() {
+		ShortStrings iter = new ShortStrings(getSampleIterator(), 5);
+		iter.hasNext();
+		assertEquals("one", iter.next());
+		iter.hasNext();
+		assertEquals("two", iter.next());
+		iter.hasNext();
+		assertEquals("three", iter.next());
+		iter.hasNext();
+		assertEquals("four", iter.next());
+		iter.hasNext();
+		assertEquals("five", iter.next());
+
+		assertEquals(false, iter.hasNext());
+
+		iter.hasPrevious();
+		assertEquals("five", iter.previous());
+		iter.hasPrevious();
+		assertEquals("four", iter.previous());
+		iter.hasPrevious();
+		assertEquals("three", iter.previous());
+		iter.hasPrevious();
+		assertEquals("two", iter.previous());
+		iter.hasPrevious();
+		assertEquals("one", iter.previous());
+
+		assertEquals(false, iter.hasPrevious());
+	}
+
+	@Test
+	public void nextToPreviousTest() {
+		ShortStrings iter = new ShortStrings(getSampleIterator(), 5);
+
+		iter.hasNext();
+		String firstElem = iter.next();
+
+		for (int i = 0; i < 100; i++) {
+			iter.hasPrevious();
+			assertEquals(firstElem, iter.previous());
+
+			iter.hasNext();
+			assertEquals(firstElem, iter.next());
+		}
+	}
+
+	@Test
+	public void manyHasNextTest() {
+		ShortStrings iter = new ShortStrings(getSampleIterator(), 5);
+
+		for (int i = 0; i < 100; i++) {
+			assertEquals(true, iter.hasNext());
+		}
+
+		assertEquals("one", iter.next());
+	}
+
+	@Test
+	public void hasPrevAndNextTest() {
+		ShortStrings iter = new ShortStrings(getSampleIterator(), 5);
+
+		// prepare
+		assertEquals("one", iter.next());
+		assertEquals(true, iter.hasPrevious());
+		assertEquals("one", iter.previous());
+		assertEquals(true, iter.hasNext());
+
+		// test
+		assertEquals("two", iter.next());
+
+	}
+
+
+}

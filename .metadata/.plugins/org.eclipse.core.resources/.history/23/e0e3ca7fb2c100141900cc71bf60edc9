@@ -1,0 +1,27 @@
+package ex22_15;
+
+import java.util.StringTokenizer;
+
+public class Calculator {
+
+	public static double calc(String expr) {
+		StringTokenizer st = new StringTokenizer(expr, " ");
+
+		double total = 0.0;
+		while (st.hasMoreTokens()) {
+			try {
+				total += new Double(st.nextToken());
+			} catch (NumberFormatException e) {
+				throw new IllegalArgumentException("空白で区切られた浮動小数点ではありません" + e.toString());
+			}
+		}
+
+		return total;
+	}
+
+	private static void calcToken(Stack<Double> stack, String token) {
+		if (token == "+") {
+			stack.push(stack.pop() + stack.pop());
+		}
+	}
+}

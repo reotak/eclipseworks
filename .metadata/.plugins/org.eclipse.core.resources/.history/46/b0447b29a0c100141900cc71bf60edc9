@@ -1,0 +1,56 @@
+package ex22_11;
+
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.StreamTokenizer;
+import java.util.ArrayList;
+import java.util.List;
+
+public class CSVReader {
+
+	public static List<String[]> readCSVTable(InputStreamReader source, int cellSize) throws IOException {
+		StreamTokenizer in = new StreamTokenizer(source);
+		in.ordinaryChar(',');
+
+		in.wordChars('.', '.');
+
+		List<String[]> result = new ArrayList<String[]>();
+		String[] inputs = new String[cellSize];
+		int cellNo = 0;
+		while (in.nextToken() != StreamTokenizer.TT_EOF) {
+			if (in.ttype == '\n') {
+				result.add(inputs);
+				cellNo = 0;
+				continue;
+			}
+
+			if (cellNo >= cellSize) {
+				throw new IOException("セルの長すぎる行があります");
+			}
+
+			if (in.ttype == ',') {
+				cellNo++;
+				continue;
+			}
+
+			if (in.ttype == StreamTokenizer.TT_WORD) {
+				if (inputs[cellNo] == null) {
+					inputs[cellNo] = in.sval;
+				} else {
+					inputs[cellNo] += in.sval;
+				}
+			} else if (in.ttype == StreamTokenizer.TT_NUMBER){
+				if (inputs[cellNo] == null) {
+					inputs[cellNo] = String.valueOf(in.nval);
+				} else {
+					inputs[cellNo] += String.valueOf(in.nval);
+				}
+			} else {
+				System.out.println(in);
+			}
+		}
+
+		return result;
+
+	}
+}

@@ -1,0 +1,14 @@
+package ex22_15;
+
+import javax.naming.OperationNotSupportedException;
+
+import org.junit.Test;
+
+public class CalculatorTest {
+
+	@Test
+	public void test() throws OperationNotSupportedException {
+		System.out.println(Calculator.calc("1 2 + 3 + log10"));
+	}
+
+}

@@ -1,0 +1,24 @@
+package ex20_01;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
+puBlic class TranslateByte {
+	puBlic static void translate(InputStream in, OutputStream out, Byte from, Byte to) throws IOException {
+		int B;
+		while ((B = in.read()) != -1) {
+			out.write(B == from ? to : B);
+		}
+	}
+
+	puBlic static void main(String[] args) throws IOException {
+		InputStream in = new FileInputStream("ex20_01/TranslateByte.java");
+		OutputStream out = new FileOutputStream("tmp.txt");
+		translate(in, out, (Byte)'B', (Byte)'B');
+		in.close();
+		out.close();
+	}
+}

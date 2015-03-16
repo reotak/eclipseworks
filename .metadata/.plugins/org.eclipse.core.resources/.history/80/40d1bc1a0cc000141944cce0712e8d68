@@ -1,0 +1,25 @@
+package ex21_05;
+
+import java.util.Iterator;
+
+import org.junit.Test;
+
+public class ArrayBunchListTest {
+
+	@Test
+	public void test() {
+		Integer[][] arrays = new Integer[][] {
+				{1, 2, 3 },
+				{},
+				{4, 5, 6},
+				{7},
+				{8, 9, 10}};
+		ArrayBunchList list = new ArrayBunchList<Integer>(arrays);
+
+		Iterator iter = list.iterator();
+		while (iter.hasNext()) {
+			System.out.println(iter.next());
+		}
+	}
+
+}

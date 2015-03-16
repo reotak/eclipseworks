@@ -1,0 +1,94 @@
+package ex21_04;
+
+import java.util.ListIterator;
+import java.util.NoSuchElementException;
+
+public class ShortStrings implements ListIterator<String> {
+	private ListIterator<String> strings; // 元の文字列
+	private final int maxLen;
+	private String nextShort; // 次が不明ならばnull
+	private String prevShort; // 前が不明ならばnull
+
+	public ShortStrings(ListIterator<String> strings, int maxLen) {
+		this.strings = strings;
+		this.maxLen = maxLen;
+		this.nextShort = null;
+		this.prevShort = null;
+	}
+
+	@Override
+	public boolean hasNext() {
+		if (nextShort != null) // すでに見つけている
+			return true;
+		while (strings.hasNext()) {
+			nextShort = strings.next();
+			if (nextShort.length() <= maxLen) {
+				prevShort = null; // 前の要素を不明にする
+				return true;
+			}
+
+		}
+		nextShort = null; // 見つからなかった
+		return false;
+	}
+
+	@Override
+	public String next() {
+		if (nextShort == null && !hasNext())
+			throw new NoSuchElementException();
+
+		String n = nextShort;
+		nextShort = null;
+		return n;
+	}
+
+	@Override
+	public boolean hasPrevious() {
+		if (prevShort != null) // すでに見つけている
+			return true;
+		while (strings.hasNext()) {
+			prevShort = strings.previous();
+			if (prevShort.length() <= maxLen) {
+				nextShort = null; // 前の要素を不明にする
+				return true;
+			}
+
+		}
+		nextShort = null; // 見つからなかった
+
+		return false;
+	}
+
+	@Override
+	public String previous() {
+
+		return null;
+	}
+
+	@Override
+	public int nextIndex() {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public int previousIndex() {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void remove() {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void set(String e) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void add(String e) {
+		throw new UnsupportedOperationException();
+	}
+
+
+}

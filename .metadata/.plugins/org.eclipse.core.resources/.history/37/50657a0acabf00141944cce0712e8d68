@@ -1,0 +1,54 @@
+package ex21_04;
+
+import static org.junit.Assert.*;
+
+import java.util.LinkedList;
+import java.util.ListIterator;
+
+import org.junit.Test;
+
+public class ShortStringsTest {
+
+	private ListIterator getSampleIterator() {
+		LinkedList<String> list = new LinkedList<String>();
+		list.add("Hello, World");
+		list.add("one");
+		list.add("two");
+		list.add("three");
+		list.add("LongString");
+		list.add("four");
+		list.add("five");
+		list.add("Goodbye, World");
+
+		return list.listIterator();
+	}
+
+	@Test
+	public void nextAndPrevTest() {
+		ShortStrings iter = new ShortStrings(getSampleIterator(), 5);
+		iter.hasNext();
+		assertEquals("one", iter.next());
+		iter.hasNext();
+		assertEquals("two", iter.next());
+		iter.hasNext();
+		assertEquals("three", iter.next());
+		iter.hasNext();
+		assertEquals("four", iter.next());
+		iter.hasNext();
+		assertEquals("five", iter.next());
+
+		assertEquals(false, iter.hasNext());
+		iter.hasPrevious();
+		assertEquals("five", iter.previous());
+		iter.hasPrevious();
+		assertEquals("four", iter.previous());
+		iter.hasPrevious();
+		assertEquals("three", iter.previous());
+		iter.hasPrevious();
+		assertEquals("two", iter.previous());
+		iter.hasPrevious();
+		assertEquals("one", iter.previous());
+
+	}
+
+}

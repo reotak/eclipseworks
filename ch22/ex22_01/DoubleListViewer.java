@@ -1,0 +1,62 @@
+package ex22_01;
+
+
+public class DoubleListViewer {
+	private final double[] list;
+	private final int column;
+	private final int length;
+
+	private final int WIDTH = 80;
+
+	public DoubleListViewer(double[] list, int column) {
+		if (list == null) {
+			throw new IllegalArgumentException("list is null");
+		}
+
+		if (column <= 0) {
+			throw new IllegalArgumentException("column <= 0");
+		}
+
+		this.list = list;
+		this.column = column;
+
+		// 一列39文字だとすると、39 + 1（区切り文字） + 39で合計79文字
+		length = (int)((WIDTH + 1) / column) - 1;
+	}
+
+	public String toString() {
+		String result = "";
+
+		for (int i = 0; i < list.length; i++) {
+			for (int c = 0; c < column && i < list.length; c++) {
+				if (c != 0) {
+					result += " ";
+				}
+				result += String.format("%" + length + "g", list[i]);
+				i++;
+			}
+			i--;
+			result += "\n";
+		}
+
+		return result;
+	}
+
+	public static void main(String[] args) {
+		double[] list = new double[] {
+				1.0 / 3.0,
+				Double.MAX_VALUE,
+				Double.MAX_VALUE / 1701,
+				1.23456789,
+				0.0000000000000009,
+				Double.MIN_VALUE,
+				0.0
+		};
+
+		DoubleListViewer viewer = new DoubleListViewer(list, 4);
+		System.out.println(viewer.toString());
+
+		viewer = new DoubleListViewer(list, 10);
+		System.out.println(viewer.toString());
+	}
+}

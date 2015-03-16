@@ -1,0 +1,56 @@
+package ex22_07;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+import java.util.regex.MatchResult;
+import java.util.regex.Pattern;
+
+public class CSVReader {
+	static final int CELLS = 4;
+
+	public static List<String[]> readCSVTable(Readable source) throws IOException {
+		Scanner in = new Scanner(source);
+		List<String[]> vals = new ArrayList<String[]>();
+		String expr = "^(.*),(.*),(.*),(.*)";
+		Pattern pat = Pattern.compile(expr, Pattern.MULTILINE);
+		while (in.hasNextLine()) {
+			String line = in.findInLine(pat);
+			if (line != null) {
+				String[] cells = new String[CELLS];
+				MatchResult match = in.match();
+				for (int i = 0; i < CELLS; i++) {
+					cells[i] = match.group(i + 1);
+				}
+				vals.add(cells);
+				in.nextLine(); // 改行を読み飛ばし
+			} else {
+				throw new IOException("input format error");
+			}
+		}
+		IOException ex = in.ioException();
+		if (ex != null) {
+			throw ex;
+		}
+
+		return vals;
+	}
+
+	private static String createCSVExpr(int cells) {
+		if (cells <= 0) {
+			throw new IllegalArgumentException("cells <= 0");
+		}
+
+		String expr = "^";
+		for (int i = 0; i < cells; i++) {
+			if (i != 0) {
+				expr += ",";
+			}
+
+			expr += "(.*)";
+		}
+
+		return expr;
+	}
+}

@@ -1,0 +1,21 @@
+package ex21_07;
+
+import java.util.ArrayList;
+
+public class Stack<E> {
+	final int capacity;
+	final ArrayList datas;
+
+	public Stack(int capacity) {
+		this.capacity = capacity;
+		this.datas = new ArrayList<E>(capacity);
+	}
+
+	public boolean push(E e) {
+		if (datas.size() == capacity) {
+			return false;
+		}
+		datas.add(e);
+		return true;
+	}
+}

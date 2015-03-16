@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move element &apos;SortListReader.java&apos; to &apos;ch21/ex21_01&apos;&#x0D;&#x0A;- 元のプロジェクト: &apos;ch21&apos;&#x0D;&#x0A;- 宛先要素: &apos;ch21/ex21_01&apos;&#x0D;&#x0A;- オリジナル要素: &apos;ch21.SortListReader.java&apos;&#x0D;&#x0A;- リファクタリングされた要素の参照を更新" description="コンパイル単位を移動" destination="/&lt;ex21_01" element1="/&lt;ch21{SortListReader.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.move" patterns="*" policy="org.eclipse.jdt.ui.moveResources" qualified="false" references="true" stamp="1424696837161" units="1" version="1.0"/>
+</session>

@@ -1,0 +1,19 @@
+package ex22_14;
+
+import java.util.StringTokenizer;
+
+public class DoubleListReader {
+	public static double sum(String doubleList) {
+		StringTokenizer st = new StringTokenizer(doubleList, " ");
+
+		while (st.hasMoreTokens()) {
+			System.out.println(st.nextToken());
+		}
+
+		return 0.0;
+	}
+
+	public static void main(String[] args) {
+		sum("0.1 0.2 0.3 0.4");
+	}
+}

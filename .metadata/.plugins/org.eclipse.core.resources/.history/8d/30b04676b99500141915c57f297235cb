@@ -1,9 +1,0 @@
-package ex16_10;
-
-public class SimplePlayer extends Player {
-
-	public void play(Game game) {
-		System.out.println("Game");
-	}
-
-}

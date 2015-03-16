@@ -1,0 +1,30 @@
+package ex22_05;
+
+import java.util.Random;
+
+public class RandomTest {
+	private static int[] resultCount = new int[6];
+
+	private static void resetResultCount() {
+		for (int i = 0; i < resultCount.length; i++) {
+			resultCount[i] = 0;
+		}
+	}
+
+	private static void printResultCount() {
+		for (int i = 0; i < resultCount.length; i++) {
+			System.out.printf("\t %d : %5d\n", i + 1, resultCount[i]);
+		}
+	}
+
+	public static void main(String[] arg) {
+		System.out.println("----- nextInt --------");
+		resetResultCount();
+		Random r = new Random();
+		for (int i = 0; i < 100000; i++) {
+			resultCount[r.nextInt(5)]++;
+		}
+		printResultCount();
+
+	}
+}

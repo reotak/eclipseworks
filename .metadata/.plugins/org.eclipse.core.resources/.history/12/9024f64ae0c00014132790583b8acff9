@@ -1,0 +1,30 @@
+package ex22_02;
+
+import java.util.BitSet;
+import java.util.HashSet;
+
+public class WhichChars {
+	private HashSet<Character> used = new HashSet<Character>();
+
+	public WhichChars(String str) {
+		for (int i = 0; i < str.length(); i++) {
+			used.set(str.charAt(i));
+		}
+	}
+
+	public String toString() {
+		String desc = "[";
+		for (int i = used.nextSetBit(0); i >= 0; i = used.nextSetBit(i + 1)) {
+			desc += (char) i;
+		}
+		return desc + "]";
+	}
+
+	public static void main(String[] args) {
+		String target = "\uD800あいうえおHello, World.";
+		WhichChars wc = new WhichChars(target);
+
+		System.out.println("target : " + target);
+		System.out.println("result : " + wc.toString());
+	}
+}

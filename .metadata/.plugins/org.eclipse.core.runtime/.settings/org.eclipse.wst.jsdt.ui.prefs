@@ -1,6 +1,6 @@
 eclipse.preferences.version=1
 fontPropagated=true
-org.eclipse.jface.textfont=1|\u3086\u305F\u307D\u3093\uFF08\u30B3\u30FC\u30C7\u30A3\u30F3\u30B0\uFF09|12.0|0|WINDOWS|1|-24|0|0|0|400|0|0|0|-128|3|2|1|1|\u3086\u305F\u307D\u3093\uFF08\u30B3\u30FC\u30C7\u30A3\u30F3\u30B0\uFF09;
+org.eclipse.jface.textfont=1|\u3086\u305F\u307D\u3093\uFF08\u30B3\u30FC\u30C7\u30A3\u30F3\u30B0\uFF09|14.25|0|WINDOWS|1|-19|0|0|0|400|0|0|0|-128|3|2|1|1|\u3086\u305F\u307D\u3093\uFF08\u30B3\u30FC\u30C7\u30A3\u30F3\u30B0\uFF09;
 org.eclipse.wst.jsdt.ui.editor.tab.width=
 org.eclipse.wst.jsdt.ui.formatterprofiles.version=11
 org.eclipse.wst.jsdt.ui.javadoclocations.migrated=true

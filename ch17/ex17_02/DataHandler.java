@@ -37,8 +37,6 @@ class DataHandler {
 		return name.getBytes();
 	}
 
-
-	// 本当にGCされるかどうかが未定義なため、テストではなくmainで回収されているかを確認する。
 	public static void main(String[] args) {
 		File file = new File("C:/Users/ymt/Dropbox/java/eclipseworks/ch17/ex17_02/DataHandler.java");
 

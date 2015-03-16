@@ -1,0 +1,67 @@
+package ex21_02;
+
+import java.io.File;
+import java.lang.ref.WeakReference;
+import java.util.WeakHashMap;
+
+class DataHandler {
+	private WeakHashMap<File, byte[]> lastFile;
+
+	byte[] readFile(final File file) {
+		byte[] data;
+
+		if (file == null) {
+			throw new IllegalArgumentException("file is null");
+		}
+
+		// データを記録していたら、そのデータを返す
+		if ((data = lastFile.get(file)) != null) {
+			return data;
+		}
+
+		// 記録していないので、読み込む
+		data = readBytesFromFile(file);
+		lastFile = new WeakReference<File>(file);
+		lastData = new WeakReference<byte[]>(data);
+		return data;
+	}
+
+	// ファイル名のバイトの配列表現を返す（実装しない）
+	public static byte[] readBytesFromFile(File file) {
+		String name = file.getName();
+		return name.getBytes();
+	}
+
+	public static void main(String[] args) {
+		File file = new File("ch21/ex21_02/DataHandler.java");
+
+		DataHandler handler = new DataHandler();
+		byte[] data = handler.readFile(file);
+
+		File nowFile = handler.lastFile.get();
+		String nowName = nowFile != null ? nowFile.getName() : null;
+		if (nowName != null) {
+			System.out.println("GCの実行前 nowName : " + nowName);
+		} else {
+			System.out.println("GCの実行前ですが nowName が null です");
+		}
+
+		nowFile = null;
+		nowName = null;
+
+		file = null;
+		Runtime.getRuntime().gc();
+
+		nowFile = handler.lastFile.get();
+		nowName =  nowFile != null ? nowFile.getName() : null;
+
+		if (nowName != null) {
+			System.out.println("GCを実行しましたが、オブジェクトは回収されていません");
+		} else {
+			System.out.println("GCを実行したところ、オブジェクトは回収されていました");
+		}
+
+
+	}
+
+}

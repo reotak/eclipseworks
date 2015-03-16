@@ -1,0 +1,42 @@
+package ex23_01;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+
+public class ProcessRunner {
+	public static String[] ls(String dir, String opts) throws Exception {
+		try {
+			String[] cmdArray = { "cmd /c DIR", opts, dir};
+			Process child = Runtime.getRuntime().exec(cmdArray);
+			InputStream lsOut = child.getInputStream();
+			InputStreamReader r = new InputStreamReader(lsOut);
+			BufferedReader in = new BufferedReader(r);
+
+			List<String> lines = new ArrayList<String>();
+
+			String line;
+			while ((line = in.readLine()) != null) {
+				lines.add(line);
+			}
+
+			if (child.waitFor() != 0) {
+				throw new Exception();
+			}
+
+			return lines.toArray(new String[lines.size()]);
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
+
+	public static void main(String[] args) throws Exception {
+		for (String line : ls(".", "")) {
+			System.out.println(line);
+		}
+	}
+
+}

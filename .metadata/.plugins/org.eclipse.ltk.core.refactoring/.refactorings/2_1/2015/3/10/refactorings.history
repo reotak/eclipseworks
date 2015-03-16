@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="型 &apos;clock2_1.FreeFontClock&apos; を &apos;Clock&apos; に名前変更します&#x0D;&#x0A;- 元のプロジェクト: &apos;2_1&apos;&#x0D;&#x0A;- オリジナル要素: &apos;clock2_1.FreeFontClock&apos;&#x0D;&#x0A;- 名前変更済み要素: &apos;clock2_1.Clock&apos;&#x0D;&#x0A;- リファクタリングされた要素の参照を更新&#x0D;&#x0A;- コメントおよびストリング内のテキスト出現箇所の更新" description="型名 &apos;FreeFontClock&apos; を変更します" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;clock2_1{FreeFontClock.java[FreeFontClock" matchStrategy="1" name="Clock" qualified="false" references="true" similarDeclarations="false" stamp="1425400469211" textual="false" version="1.0"/>
+</session>

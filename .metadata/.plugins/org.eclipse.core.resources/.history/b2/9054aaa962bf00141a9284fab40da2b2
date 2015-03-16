@@ -1,0 +1,17 @@
+package ex21_01;
+
+import java.io.File;
+import java.io.IOException;
+
+import org.junit.Test;
+
+public class SortListReaderTest {
+
+	@Test
+	public void test() throws IOException {
+		String targetFileName = "ex21_01/SortListReader.java";
+		SortListReader slr = new SortListReader(new File(targetFileName));
+		System.out.println(slr.toString());
+	}
+
+}

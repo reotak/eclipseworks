@@ -1,0 +1,245 @@
+package clock2_1;
+import java.awt.Choice;
+import java.awt.Color;
+import java.awt.Dialog;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Frame;
+import java.awt.Graphics;
+import java.awt.GraphicsEnvironment;
+import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.Label;
+import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.Calendar;
+
+import javax.swing.JFrame;
+
+
+public class FreeFontClock extends JFrame {
+	private final int maxWidth = 2048;
+	private final int maxHeight = 1200;
+	private int width = 900, height = 300; // frame全体のサイズ
+	private int whiteSpace = 25; // 上下左右の空白領域
+	private int titleSpace = 100; // 上方向のタイトルバーの領域
+
+	private final int defaultFontSize = 72;
+
+	public static void main(String[] args) {
+		FreeFontClock clock = new FreeFontClock(); // start this program
+		clock.run();
+	}
+
+	public FreeFontClock() {
+		setSize(width, height);
+		setVisible(true);
+		addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent event) {
+				System.exit(0);
+			}
+		});
+	}
+
+	private void run() {
+		for (;;) {
+			repaint(); // 再描写する
+
+			// スリープを行う
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				throw new InternalError(e);
+			}
+		}
+	}
+
+	// 現在時刻を取得し時計を描画する
+	public void paint(Graphics g) {
+		Image img = createImage(maxWidth, maxHeight);
+		Graphics buf = img.getGraphics();
+
+
+		// 時刻を取得
+		String time = timeToString(Calendar.getInstance());
+
+		// フォントを生成
+		String name = g.getFont().getName();
+		if (fontNameChoice != null) {
+			name = fontNameChoice.getSelectedItem();
+		}
+		int size = defaultFontSize;
+		if (fontSizeChoice != null) {
+			try {
+				size = Integer.parseInt(fontSizeChoice.getSelectedItem());
+			} catch (Exception e) {
+			}
+		}
+		Font font = createFont(g.getFont(), name, size);
+
+		buf.setFont(font);
+
+		// サイズを計算しなおす
+		FontMetrics fo = buf.getFontMetrics();
+		width = fo.stringWidth(time) + whiteSpace * 2;
+		height = fo.getHeight() + titleSpace + whiteSpace;
+
+		// bufをバックグラウンドカラーで塗りつぶす
+		Color groundColor = null;
+		if (groundColorChoice != null) {
+			groundColor = colorStringToColor(groundColorChoice.getSelectedItem());
+		} else {
+			groundColor = this.getBackground();
+		}
+		buf.setColor(groundColor);
+		buf.fillRect(0, 0, width, height);
+
+
+		// フォントの色を設定
+		Color fontColor = null;
+		if (fontColorChoice != null) {
+			fontColor = colorStringToColor(fontColorChoice.getSelectedItem());
+		} else {
+			fontColor = g.getColor();
+		}
+		buf.setColor(fontColor);
+
+		// 時刻を書き込む
+		buf.drawString(time, whiteSpace, height - whiteSpace);
+		g.drawImage(img, 0, 0, this);
+
+		// resize
+		this.setSize(width, height);
+
+	}
+
+	// 時刻を受け取り文字列にして返す
+	private String timeToString(Calendar cal) {
+		int hour = cal.get(Calendar.HOUR_OF_DAY);
+		int minute = cal.get(Calendar.MINUTE);
+		int second = cal.get(Calendar.SECOND);
+
+		String result = "";
+		// 各ディスプレイに値を与えて再描写
+		result += Integer.toString(hour   / 10);
+		result += Integer.toString(hour   % 10);
+		result += ":";
+		result += Integer.toString(minute / 10);
+		result += Integer.toString(minute % 10);
+		result += ":";
+		result += Integer.toString(second / 10);
+		result += Integer.toString(second % 10);
+		return(result);
+	}
+
+	private Font createFont(Font defaultFont, String name, int size) {
+		if (name == null) {
+			name = defaultFont.getName();
+		}
+		if (size < 0) {
+			size = defaultFont.getSize();
+		}
+
+		return new Font(name, Font.PLAIN, size);
+	}
+
+	public void update(Graphics g) {
+		paint(g);
+	}
+
+	public void actionPerformed(ActionEvent e) {
+		if (propertyMenu == e.getSource()) {
+			if (propertyDialog == null) { // craete
+				propertyDialog = new Dialog(new Frame(), "フォント設定");
+				propertyDialog.setSize(300, 300);
+				propertyDialog.setResizable(false);
+				propertyDialog.addWindowListener(new WindowAdapter() {
+					public void windowClosing(WindowEvent event) {
+						propertyDialog.dispose();
+					}
+				});
+				propertyDialog.setLayout(new GridLayout(8, 1));
+
+				propertyDialog.add(new Label("Font Name: "));
+				fontNameChoice = createFontNameChoice();
+				propertyDialog.add(fontNameChoice);
+				propertyDialog.add(new Label("Font Size: "));
+				fontSizeChoice = createFontSizeChoice();
+				propertyDialog.add(fontSizeChoice);
+				propertyDialog.add(new Label("Font Color: "));
+				fontColorChoice = createFontColorChoice();
+				propertyDialog.add(fontColorChoice);
+				propertyDialog.add(new Label("Ground Color: "));
+				groundColorChoice = createGroundColorChoice();
+				propertyDialog.add(groundColorChoice);
+
+				propertyDialog.setVisible(true);
+			} else {
+				if (propertyDialog.isVisible() == false) {
+					propertyDialog.setVisible(true);
+				}
+			}
+		}
+	}
+
+	private Choice createFontNameChoice() {
+		Choice c = new Choice();
+
+		for (Font f : GraphicsEnvironment.getLocalGraphicsEnvironment().getAllFonts()) {
+			c.addItem(f.getName());
+		}
+		return c;
+	}
+
+	private Choice createFontSizeChoice() {
+		Choice c = new Choice();
+		int[] sizes = new int[]{72, 144, 288, 576};
+		for (Integer s : sizes) {
+			c.addItem(s.toString());
+		}
+		return c;
+	}
+
+	private Choice createFontColorChoice() {
+		Choice c = new Choice();
+		c.addItem("Black");
+		c.addItem("Blue");
+		c.addItem("Red");
+		c.addItem("Yellow");
+		c.addItem("White");
+		return c;
+	}
+
+	private Choice createGroundColorChoice() {
+		Choice c = new Choice();
+		c.addItem("White");
+		c.addItem("Black");
+		c.addItem("Blue");
+		c.addItem("Red");
+		c.addItem("Yellow");
+		return c;
+	}
+
+	private Color colorStringToColor(String s) {
+		switch(s) {
+		case "White" :
+			return Color.WHITE;
+		case "Black" :
+			return Color.BLACK;
+		case "Blue" :
+			return Color.BLUE;
+		case "Red" :
+			return Color.RED;
+		case "Yellow" :
+			return Color.YELLOW;
+		default:
+			return Color.BLACK;
+		}
+	}
+
+	public void windowClosing(WindowEvent e) {
+		System.exit(0);
+	}
+
+}

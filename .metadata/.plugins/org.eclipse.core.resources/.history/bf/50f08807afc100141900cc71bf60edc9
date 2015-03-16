@@ -1,0 +1,14 @@
+package ex22_14;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class DoubleListReaderTest {
+
+	@Test
+	public void test() {
+		fail("まだ実装されていません");
+	}
+
+}
